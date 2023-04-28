@@ -34,14 +34,12 @@ export default {
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
             },
-            gridTemplateColumns: {
-                body: '50px 35% 65% minmax(400px, 1fr) 1fr',
-            },
+        
             height: {
-                inputBox: '70px',
+                '70': '70px',
             },
             spacing: {
-                movePlaceholderText: '88px',
+                '88': '88px',
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
