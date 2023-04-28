@@ -4,7 +4,7 @@ function SearchBar() {
     return (
         <div>
             {/* <Navbar/> */}
-            <div className="h-52 bg-cover flex flex-col items-center justify-center bg-search-bar-bg-image">
+            <div className="h-52 bg-cover flex flex-col items-center justify-center gap-4 bg-search-bar-bg-image">
                 <h1 className="text-slate-500 font-semibold font-roboto text-slogan">
                     Innovate and Elevate: Find Your Perfect Hackathons.
                 </h1>

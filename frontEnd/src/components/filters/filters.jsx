@@ -15,7 +15,7 @@ function Filters() {
                     />
                 }
             />
-            <hr className="w-85rem mt-6 border-hrLineHeight" />
+            <hr className="w-85rem mt-6 border-borderWidth1.5" />
             <Accordion
                 title="By Date"
                 children={
@@ -41,7 +41,7 @@ function Filters() {
                     </div>
                 }
             />
-            <hr className="w-85rem mt-6 border-hrLineHeight" />
+            <hr className="w-85rem mt-6 border-borderWidth1.5" />
             <Accordion
                 title="By Price"
                 children={
@@ -60,7 +60,7 @@ function Filters() {
                     </div>
                 }
             />
-            <hr className="w-85rem mt-6 border-hrLineHeight" />
+            <hr className="w-85rem mt-6 border-borderWidth1.5" />
         </div>
     );
 }

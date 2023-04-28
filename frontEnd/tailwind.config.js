@@ -15,15 +15,16 @@ export default {
             },
             backgroundImage: {
                 'search-bar-bg-image':
-                    "url('https://scontent.fcjb8-1.fna.fbcdn.net/v/t39.2365-6/330798655_571265925050597_4270686630180425128_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ad8a9d&_nc_ohc=GJGd733wQ50AX88q8i6&_nc_ht=scontent.fcjb8-1.fna&oh=00_AfCOIDYDIIKqDP1o5dqDRZ8xzhwjxHM2UHC1VKeU9qKmJw&oe=644BC0BF')",
+                    "url('./src/assets/search-bar-bg-image.png')",
             },
             colors: {
-                placeholderColor: '#A0A0A0',
-                hackathonNameColor: '#595959',
-                primaryColor: '#006ECC',
+                placeholder: '#A0A0A0',
+                title: '#595959',
+                primary: '#006ECC',
+                cards: '#E5F3FF'
             },
             borderWidth: {
-                hrLineHeight: '1.5px',
+                'borderWidth1.5': '1.5px',
             },
             width: {
                 '85rem': '302px',

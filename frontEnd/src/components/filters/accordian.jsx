@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import plusIcon from '../../assets/plusIcon.png'
 function Accordion({ title, children }) {
     const [isActive, setIsActive] = useState(true);
 
@@ -11,27 +12,17 @@ function Accordion({ title, children }) {
                 <p className="font-[500] text-[#5B5D60] text-md">{title}</p>
                 <div className="cursor-pointer">
                     <span className="text-2xl">
-                        {isActive ? (
-                            <img
-                                src="https://img.icons8.com/?size=512&id=3220&format=png"
-                                alt=""
-                                className="h-5 -rotate-45"
-                            />
-                        ) : (
-                            <img
-                                src="https://img.icons8.com/?size=512&id=3220&format=png"
-                                alt=""
-                                className="h-5 "
-                            />
-                        )}
+                        <img
+                            src={plusIcon}
+                            alt=""
+                            className={`h-5 ${
+                                isActive ? '-rotate-45' : ''
+                            } transition duration-300 ease-in-out`}
+                        />
                     </span>
                 </div>
             </div>
-            {isActive && (
-                <div className="transition duration-300 ease-in-out">
-                    {children}
-                </div>
-            )}
+            {isActive && <div className="">{children}</div>}
         </div>
     );
 }
