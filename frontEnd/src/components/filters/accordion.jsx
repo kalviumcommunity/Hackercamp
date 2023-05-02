@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import plusIcon from '../../assets/plus-icon.png';
+import plusIcon from '../../assets/plusIcon.png';
 function Accordion({ title, children }) {
     const [isActive, setIsActive] = useState(true);
 

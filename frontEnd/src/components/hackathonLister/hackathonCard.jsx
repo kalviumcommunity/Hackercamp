@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HandleDate from './handleDate';
 import HandleDay from './handleDay';
 import HandleTime from './handleTime';
-import dotIcon from '../../assets/full-stop.png';
+import dotIcon from '../../assets/fullStop.png';
 function HackathonCard({ hackathon }) {
     return (
         <>
