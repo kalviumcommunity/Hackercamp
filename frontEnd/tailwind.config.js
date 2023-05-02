@@ -35,12 +35,23 @@ export default {
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
             },
+<<<<<<< HEAD
 
             height: {
                 70: '70px',
             },
             spacing: {
                 88: '88px',
+=======
+            gridTemplateColumns: {
+                body: '50px 35% 65% minmax(400px, 1fr) 1fr',
+            },
+            height: {
+                inputBox: '70px',
+            },
+            spacing: {
+                movePlaceholderText: '88px',
+>>>>>>> parent of 7f4ab97 (feedback changes)
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
