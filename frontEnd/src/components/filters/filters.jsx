@@ -1,66 +1,169 @@
-import React, { useState } from 'react';
-import Accordion from './accordian';
+import React, { useState, useEffect } from 'react';
+import Accordion from './accordion';
+import hackathons from '../data.json';
+import HackathonList from '../hackathonLister/hackathonList';
 function Filters() {
-   
+    const [themeFilter, setThemeFilter] = useState('');
+    const [filteredHackathon, setFilteredHackathon] = useState([]);
+    const [checkboxes, setCheckboxes] = useState({
+        paid: false,
+        free: false,
+    });
+    const [dateFilters, setDateFilters] = useState({
+        From: '1900-01-01',
+        To: '2100-12-01',
+    });
+
+    const handleCheckboxChange = (e) => {
+        setCheckboxes({
+            ...checkboxes,
+            [e.target.name]: e.target.checked,
+        });
+    };
+
+    const handleDateFilterChange = (e) => {
+        setDateFilters({
+            ...dateFilters,
+            [e.target.name]: e.target.value,
+        });
+    };
+    useEffect(() => {
+        let filteredHackathons = hackathons;
+
+        // Filter by theme
+        themeFilter !== ''
+            ? (filteredHackathons = filteredHackathons.filter((hackathon) =>
+                  hackathon.tags.includes(themeFilter.toLowerCase())
+              ))
+            : null;
+
+        // Filter by price
+        checkboxes.paid || checkboxes.free
+            ? (filteredHackathons = filteredHackathons.filter(
+                  (hackathon) =>
+                      (checkboxes.paid &&
+                          hackathon.price.toLowerCase().includes('paid')) ||
+                      (checkboxes.free &&
+                          hackathon.price.toLowerCase().includes('free'))
+              ))
+            : null;
+
+        // Filter by dates
+        if (dateFilters.From !== '' || dateFilters.To !== '') {
+            filteredHackathons = filteredHackathons.filter((hackathon) => {
+                const hackathonDate = new Date(hackathon.date);
+                const from =
+                    dateFilters.From !== '' ? new Date(dateFilters.From) : null;
+                const to =
+                    dateFilters.To !== '' ? new Date(dateFilters.To) : null;
+
+                if (from && to) {
+                    return hackathonDate >= from && hackathonDate <= to;
+                } else if (from) {
+                    return hackathonDate >= from;
+                } else if (to) {
+                    return hackathonDate <= to;
+                }
+
+                return true; // return true for all other cases
+            });
+        }
+
+        setFilteredHackathon(filteredHackathons);
+    }, [themeFilter, hackathons, checkboxes, dateFilters]);
+
     return (
-        <div className="w-90rem border-r-2 pt-2 h-full">
-            <h1 className="font-medium text-[22.5px]">Refine By</h1>
-            <Accordion
-                title="By Theme/ Technology"
-                children={
-                    <input
-                        type="text"
-                        placeholder="Artificial Intelligence, Machine learning"
-                        className="border h-10 w-85rem rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
-                    />
-                }
-            />
-            <hr className="w-85rem mt-6 border-borderWidth1.5" />
-            <Accordion
-                title="By Date"
-                children={
-                    <div className="flex flex gap-3 w-3/12 items-center ">
-                        <div className="flex flex-col width-full">
-                            <label className="text-gray-500" htmlFor="">
-                                From
-                            </label>
-                            <input
-                                type="date"
-                                className="border h-10 width-full rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
-                            />
+        <div className="flex px-10%">
+            <div className="flex flex-col items-center border-r border-l p-2 pr-6 w-4/12  bg-white">
+                <Accordion
+                    title="By Theme tags"
+                    children={
+                        <input
+                            type="text"
+                            placeholder="Eg,. ai, ml, blockchain"
+                            className="border h-10 w-11/12 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                            onKeyDown={(e) => {
+                                if (e.keyCode === 13) {
+                                    setThemeFilter(e.target.value);
+                                }
+                            }}
+                            onChange={(e) => {
+                                if (e.target.value === '') {
+                                    setThemeFilter(e.target.value);
+                                }
+                            }}
+                        />
+                    }
+                />
+                <hr className="w-10/12 my-3" />
+                <Accordion
+                    title="By Date"
+                    children={
+                        <div className="flex flex-col gap-5">
+                            <div className="flex flex-col flex-shrink-2 gap-1">
+                                <label
+                                    className="text-gray-500 text-sm"
+                                    htmlFor=""
+                                >
+                                    Start Date
+                                </label>
+                                <input
+                                    type="date"
+                                    name="From"
+                                    className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
+                                    onChange={handleDateFilterChange}
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <label
+                                    className="text-gray-500 text-sm"
+                                    htmlFor=""
+                                >
+                                    End Date
+                                </label>
+                                <input
+                                    type="date"
+                                    name="To"
+                                    className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                                    onChange={handleDateFilterChange}
+                                />
+                            </div>
                         </div>
-                        <div className="flex flex-col">
-                            <label className="text-gray-500" htmlFor="">
-                                To
-                            </label>
-                            <input
-                                type="date"
-                                className="border h-10 width-full rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
-                            />
+                    }
+                />
+                <hr className="w-10/12 my-3" />
+                <Accordion
+                    title="By Price"
+                    children={
+                        <div className="flex gap-6 text-gray-500">
+                            <div className="flex w-24 justify-between">
+                                <input
+                                    type="checkbox"
+                                    name="paid"
+                                    checked={checkboxes.paid}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <span>Paid entry</span>
+                            </div>
+                            <div className="flex w-24 justify-between">
+                                <input
+                                    type="checkbox"
+                                    name="free"
+                                    checked={checkboxes.free}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <span>Free entry</span>
+                            </div>
                         </div>
-                    </div>
-                }
-            />
-            <hr className="w-85rem mt-6 border-borderWidth1.5" />
-            <Accordion
-                title="By Price"
-                children={
-                    <div className="flex flex-col text-gray-500">
-                        <div className="flex w-14 justify-between">
-                            <input
-                                type="checkbox"
-                                onChange={(e) => handleCheckBox(e)}
-                            />
-                            <span>Paid</span>
-                        </div>
-                        <div className="flex w-14 justify-between">
-                            <input type="checkbox" />
-                            <span>Free</span>
-                        </div>
-                    </div>
-                }
-            />
-            <hr className="w-85rem mt-6 border-borderWidth1.5" />
+                    }
+                />
+                <hr className="w-10/12 my-3 " />
+            </div>
+            {filteredHackathon.length === 0 ? (
+                'Our bad! There is no hackathons. Please change your filters'
+            ) : (
+                <HackathonList data={filteredHackathon} />
+            )}
         </div>
     );
 }

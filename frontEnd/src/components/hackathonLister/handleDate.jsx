@@ -4,7 +4,7 @@ function HandleDate({date, format}) {
     const options = {month:format}
     const formattedMonth = new Date(date).toLocaleDateString("en-US",options)
     let day = new Date(date).getDate()
-    day = day < 10 ? '0'+day: ""
+    day = day < 10 ? '0'+day: day
 
   return (
       <div>

@@ -3,8 +3,10 @@ import Navbar from '../navbar/navbar'
 function Details() {
   return (
     <div>
-        <Navbar/>
+    <Navbar/>
+    <div>
         
+    </div>
     </div>
   )
 }

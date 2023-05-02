@@ -7,7 +7,8 @@ export default {
         extend: {
             fontSize: {
                 slogan: '28px',
-                name: '22.5px',
+                22.5: '22.5px',
+                15: '15px',
             },
             inset: {
                 400: '400px',
@@ -19,9 +20,9 @@ export default {
             },
             colors: {
                 placeholder: '#A0A0A0',
-                title: '#595959',
+                title: '#5B5D60',
                 primary: '#006ECC',
-                cards: '#E5F3FF'
+                cards: '#E6EFF7',
             },
             borderWidth: {
                 'borderWidth1.5': '1.5px',
@@ -34,20 +35,24 @@ export default {
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
             },
-        
+
             height: {
-                '70': '70px',
+                70: '70px',
             },
             spacing: {
-                '88': '88px',
+                88: '88px',
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
                 inter: ['Inter', ...defaultTheme.fontFamily.sans],
             },
-             flexShrink: {
-        2: '2'
-             }
+            padding: {
+                '10%': '10%'
+            }
+            ,
+            margin: {
+                '1%':'1%'
+            }
         },
     },
     plugins: [],
