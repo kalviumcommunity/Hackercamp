@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HackathonCard from '../hackathonLister/hackathonCard';
-// import FilteredData from '../filters/filteredData';
 const HackathonList = ({ data }) => {
     return (
         <div className="ml-10 w-4/5">
@@ -13,5 +12,4 @@ const HackathonList = ({ data }) => {
         </div>
     );
 };
-
 export default HackathonList;
