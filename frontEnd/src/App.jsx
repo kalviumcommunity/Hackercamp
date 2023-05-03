@@ -6,16 +6,14 @@ import Filters from './components/filters/filters';
 import './App.css';
 
 function App() {
-  
   return (
-      <div className="App bg-">
-              <Navbar />
-              <SearchBar />
-              <ClearFilter />
-              <Filters />
-
+      <div className="App bg-background">
+        
+          <Navbar />
+          <SearchBar />
+          <ClearFilter />
+          <Filters />
       </div>
   );
 }
-
 export default App
