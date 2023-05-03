@@ -70,7 +70,6 @@ function Filters() {
                  return true; // return true for all other cases
              });
          }
-         console.log(hackathon)
          setFilteredHackathon(filteredHackathons);
      }, [themeFilter, hackathon, checkboxes, dateFilters]);
 
