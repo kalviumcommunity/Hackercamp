@@ -23,14 +23,13 @@ export default {
                 title: '#5B5D60',
                 primary: '#006ECC',
                 cards: '#E6EFF7',
+                background:'#f8f9fa'
             },
-            borderWidth: {
-                'borderWidth1.5': '1.5px',
-            },
+
             width: {
                 '85rem': '302px',
                 '90rem': '342px',
-                cardSize: '720px',
+     
             },
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
