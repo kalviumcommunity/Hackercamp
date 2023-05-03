@@ -111,7 +111,7 @@ function Filters() {
                                 </label>
                                 <input
                                     type="date"
-                                    name="From"
+                                    name="from"
                                     className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
                                     onChange={handleDateFilterChange}
                                 />
@@ -125,7 +125,7 @@ function Filters() {
                                 </label>
                                 <input
                                     type="date"
-                                    name="To"
+                                    name="to"
                                     className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
                                     onChange={handleDateFilterChange}
                                 />
