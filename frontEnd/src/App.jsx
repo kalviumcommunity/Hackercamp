@@ -3,14 +3,11 @@ import Navbar from './components/navbar/navbar'
 import SearchBar from './components/searchbar/searchBar'
 import ClearFilter from './components/filters/clearFilter';
 import Filters from './components/filters/filters';
-import HackathonList from './components/hackathonLister/hackathonList';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import './App.css';
+
 function App() {
-  
   return (
-      <div className="App bg-[#f8f9fa]">
+      <div className="App bg-background">
         
           <Navbar />
           <SearchBar />
@@ -19,5 +16,4 @@ function App() {
       </div>
   );
 }
-
 export default App
