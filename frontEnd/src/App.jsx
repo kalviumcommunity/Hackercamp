@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Sample from './components/sample'
+import React,{ useState } from 'react'
+import Navbar from './components/navbar/navbar'
+import SearchBar from './components/searchbar/searchBar'
+import ClearFilter from './components/filters/clearFilter';
+import Filters from './components/filters/filters';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <Sample/>
-    </div>
-  )
+      <div className="App bg-background">
+        
+          <Navbar />
+          <SearchBar />
+          <ClearFilter />
+          <Filters />
+      </div>
+  );
 }
-
 export default App
