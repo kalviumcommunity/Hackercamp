@@ -10,8 +10,8 @@ function Filters() {
         free: false,
     });
     const [dateFilters, setDateFilters] = useState({
-        From: '1900-01-01',
-        To: '2100-12-01',
+        from: '1900-01-01',
+        to: '2100-12-01',
     });
     
      const handleCheckboxChange = (e) => {
@@ -49,15 +49,14 @@ function Filters() {
              : null;
 
          // Filter by dates
-         if (dateFilters.From !== '' || dateFilters.To !== '') {
              filteredHackathons = filteredHackathons.filter((hackathon) => {
                  const hackathonDate = new Date(hackathon.date);
                  const from =
-                     dateFilters.From !== ''
-                         ? new Date(dateFilters.From)
+                     dateFilters.from !== ''
+                         ? new Date(dateFilters.from)
                          : null;
                  const to =
-                     dateFilters.To !== '' ? new Date(dateFilters.To) : null;
+                     dateFilters.to !== '' ? new Date(dateFilters.to) : null;
 
                  if (from && to) {
                      return hackathonDate >= from && hackathonDate <= to;
@@ -69,7 +68,6 @@ function Filters() {
 
                  return true; // return true for all other cases
              });
-         }
          setFilteredHackathon(filteredHackathons);
      }, [themeFilter, hackathon, checkboxes, dateFilters]);
 
@@ -105,7 +103,6 @@ function Filters() {
                             <div className="flex flex-col flex-shrink-2 gap-1">
                                 <label
                                     className="text-gray-500 text-sm"
-                                    htmlFor=""
                                 >
                                     Start Date
                                 </label>
@@ -119,7 +116,6 @@ function Filters() {
                             <div className="flex flex-col gap-1">
                                 <label
                                     className="text-gray-500 text-sm"
-                                    htmlFor=""
                                 >
                                     End Date
                                 </label>
