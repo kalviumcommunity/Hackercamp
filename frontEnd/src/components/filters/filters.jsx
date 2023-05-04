@@ -1,63 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import Accordion from './accordion';
 import HackathonList from '../hackathonLister/hackathonList';
+import hackathon from '../data.json'
 function Filters() {
     const [themeFilter, setThemeFilter] = useState('');
-    const [filteredHackathon, setFilteredHackathon] = useState([]);
+    const [filteredHackathons, setFilteredHackathon] = useState([]);
     const [checkboxes, setCheckboxes] = useState({
         paid: false,
         free: false,
     });
     const [dateFilters, setDateFilters] = useState({
-        From: '1900-01-01',
-        To: '2100-12-01',
+        from: '1900-01-01',
+        to: '2100-12-01',
     });
-    const [hackathon, setHackathons] = useState([
-        
-            {
-                id: 1,
-                name: 'Blockchain summit 2023',
-                description:
-                    'Join our blockchain hackathon and collaborate with like-minded individuals to build innovative decentralized solutions that can transform industries and promote trustless transactions.',
-                date: '2023-08-12',
-                location: 'online',
-                image: 'https://res.cloudinary.com/ideation/image/upload/c_fill,dpr_auto,f_auto,q_auto:eco,w_400/juj3fkm2jhkfasujeeny',
-                price: 'Free',
-                time: '8pm',
-                tags: ['blockchain'],
-                details:
-                    'Blockchain technology is a distributed ledger technology that enables secure and transparent transactions without the need for intermediaries. It has gained popularity due to its potential for creating decentralized, trustless, and tamper-proof systems. A blockchain hackathon would provide a platform for developers, entrepreneurs, and blockchain enthusiasts to collaborate, share knowledge, and build innovative blockchain-based solutions. Participants in a blockchain hackathon would be expected to have knowledge of blockchain technology, its workings, and its potential applications. They would also need to have programming skills and knowledge of software development. The hackathon could have a specific focus, such as developing a decentralized application for supply chain management or creating a blockchain-based identity verification system. The hackathon could be organized over a period of a few days or even weeks, allowing participants to ideate, collaborate, and develop their solutions. Participants could form teams, pitch their ideas, and receive mentorship and feedback from industry experts. The hackathon could culminate in a demo day, where participants showcase their solutions to a panel of judges and potential investors.',
-            },
-            {
-                id: 2,
-                name: 'Artificial Intelligence hackathon',
-                description:
-                    'Join our blockchain hackathon and collaborate with like-minded individuals to build innovative decentralized solutions that can transform industries and promote trustless transactions.',
-                date: '2023-08-12',
-                location: 'online',
-                image: 'https://res.cloudinary.com/ideation/image/upload/c_fill,dpr_auto,f_auto,q_auto:eco,w_400/juj3fkm2jhkfasujeeny',
-                price: 'Paid',
-                time: '8pm',
-                tags: ['ai'],
-                details:
-                    'Blockchain technology is a distributed ledger technology that enables secure and transparent transactions without the need for intermediaries. It has gained popularity due to its potential for creating decentralized, trustless, and tamper-proof systems. A blockchain hackathon would provide a platform for developers, entrepreneurs, and blockchain enthusiasts to collaborate, share knowledge, and build innovative blockchain-based solutions. Participants in a blockchain hackathon would be expected to have knowledge of blockchain technology, its workings, and its potential applications. They would also need to have programming skills and knowledge of software development. The hackathon could have a specific focus, such as developing a decentralized application for supply chain management or creating a blockchain-based identity verification system. The hackathon could be organized over a period of a few days or even weeks, allowing participants to ideate, collaborate, and develop their solutions. Participants could form teams, pitch their ideas, and receive mentorship and feedback from industry experts. The hackathon could culminate in a demo day, where participants showcase their solutions to a panel of judges and potential investors.',
-            },
-            {
-                id: 3,
-                name: 'Machine Learning: The future',
-                description:
-                    'Join our blockchain hackathon and collaborate with like-minded individuals to build innovative decentralized solutions that can transform industries and promote trustless transactions.',
-                date: '2023-08-12',
-                location: 'online',
-                image: 'https://res.cloudinary.com/ideation/image/upload/c_fill,dpr_auto,f_auto,q_auto:eco,w_400/juj3fkm2jhkfasujeeny',
-                price: 'Paid',
-                time: '8pm',
-                tags: ['ml'],
-                details:
-                    'Blockchain technology is a distributed ledger technology that enables secure and transparent transactions without the need for intermediaries. It has gained popularity due to its potential for creating decentralized, trustless, and tamper-proof systems. A blockchain hackathon would provide a platform for developers, entrepreneurs, and blockchain enthusiasts to collaborate, share knowledge, and build innovative blockchain-based solutions. Participants in a blockchain hackathon would be expected to have knowledge of blockchain technology, its workings, and its potential applications. They would also need to have programming skills and knowledge of software development. The hackathon could have a specific focus, such as developing a decentralized application for supply chain management or creating a blockchain-based identity verification system. The hackathon could be organized over a period of a few days or even weeks, allowing participants to ideate, collaborate, and develop their solutions. Participants could form teams, pitch their ideas, and receive mentorship and feedback from industry experts. The hackathon could culminate in a demo day, where participants showcase their solutions to a panel of judges and potential investors.',
-            },
-        ],
-    );
+    
+     const handleCheckboxChange = (e) => {
+         setCheckboxes({
+             ...checkboxes,
+             [e.target.name]: e.target.checked,
+         });
+     };
+
+     const handleDateFilterChange = (e) => {
+         setDateFilters({
+             ...dateFilters,
+             [e.target.name]: e.target.value,
+         });
+     };
+     useEffect(() => {
+         let filteredHackathons = hackathon;
+
+         // Filter by theme
+         themeFilter !== ''
+             ? (filteredHackathons = filteredHackathons.filter((hackathon) =>
+                   hackathon.tags.includes(themeFilter.toLowerCase())
+               ))
+             : null;
+
+         // Filter by price
+         checkboxes.paid || checkboxes.free
+             ? (filteredHackathons = filteredHackathons.filter(
+                   (hackathon) =>
+                       (checkboxes.paid &&
+                           hackathon.price.toLowerCase().includes('paid')) ||
+                       (checkboxes.free &&
+                           hackathon.price.toLowerCase().includes('free'))
+               ))
+             : null;
+
+         // Filter by dates
+             filteredHackathons = filteredHackathons.filter((hackathon) => {
+                 const hackathonDate = new Date(hackathon.date);
+                 const from =
+                     dateFilters.from !== ''
+                         ? new Date(dateFilters.from)
+                         : null;
+                 const to =
+                     dateFilters.to !== '' ? new Date(dateFilters.to) : null;
+
+                 if (from && to) {
+                     return hackathonDate >= from && hackathonDate <= to;
+                 } else if (from) {
+                     return hackathonDate >= from;
+                 } else if (to) {
+                     return hackathonDate <= to;
+                 }
+
+                 return true; // return true for all other cases
+             });
+         setFilteredHackathon(filteredHackathons);
+     }, [themeFilter, hackathon, checkboxes, dateFilters]);
+
 
     return (
         <div className="flex px-10%">
@@ -69,6 +82,16 @@ function Filters() {
                             type="text"
                             placeholder="Eg,. ai, ml, blockchain"
                             className="border h-10 w-11/12 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                            onKeyDown={(e) => {
+                                if (e.keyCode === 13) {
+                                    setThemeFilter(e.target.value);
+                                }
+                            }}
+                            onChange={(e) => {
+                                if (e.target.value === '') {
+                                    setThemeFilter(e.target.value);
+                                }
+                            }}
                         />
                     }
                 />
@@ -80,27 +103,27 @@ function Filters() {
                             <div className="flex flex-col flex-shrink-2 gap-1">
                                 <label
                                     className="text-gray-500 text-sm"
-                                    htmlFor=""
                                 >
                                     Start Date
                                 </label>
                                 <input
                                     type="date"
-                                    name="From"
+                                    name="from"
                                     className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
+                                    onChange={handleDateFilterChange}
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
                                 <label
                                     className="text-gray-500 text-sm"
-                                    htmlFor=""
                                 >
                                     End Date
                                 </label>
                                 <input
                                     type="date"
-                                    name="To"
+                                    name="to"
                                     className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                                    onChange={handleDateFilterChange}
                                 />
                             </div>
                         </div>
@@ -112,11 +135,21 @@ function Filters() {
                     children={
                         <div className="flex gap-6 text-gray-500">
                             <div className="flex w-24 justify-between">
-                                <input type="checkbox" />
+                                <input
+                                    type="checkbox"
+                                    name="paid"
+                                    checked={checkboxes.paid}
+                                    onChange={handleCheckboxChange}
+                                />
                                 <span>Paid entry</span>
                             </div>
                             <div className="flex w-24 justify-between">
-                                <input type="checkbox" />
+                                <input
+                                    type="checkbox"
+                                    name="free"
+                                    checked={checkboxes.free}
+                                    onChange={handleCheckboxChange}
+                                />
                                 <span>Free entry</span>
                             </div>
                         </div>
@@ -124,7 +157,7 @@ function Filters() {
                 />
                 <hr className="w-10/12 my-3 " />
             </div>
-            <HackathonList data={hackathon} />
+            <HackathonList data={filteredHackathons} />
         </div>
     );
 }
