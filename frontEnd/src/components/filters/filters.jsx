@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Accordion from './accordion';
 import HackathonList from '../hackathonLister/hackathonList';
-import hackathon from '../data.json'
-function Filters() {
+function Filters({hackathon}) {
     const [themeFilter, setThemeFilter] = useState('');
     const [filteredHackathons, setFilteredHackathon] = useState([]);
     const [checkboxes, setCheckboxes] = useState({
@@ -74,14 +73,14 @@ function Filters() {
 
     return (
         <div className="flex px-10%">
-            <div className="flex flex-col items-center border-r border-l p-2 pr-6 w-4/12  bg-white">
+            <div className="flex flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-4/12  bg-white">
                 <Accordion
                     title="By Theme tags"
                     children={
                         <input
                             type="text"
                             placeholder="Eg,. ai, ml, blockchain"
-                            className="border h-10 w-11/12 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                            className="border-slate-200 h-10 w-11/12 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
                             onKeyDown={(e) => {
                                 if (e.keyCode === 13) {
                                     setThemeFilter(e.target.value);
@@ -95,41 +94,37 @@ function Filters() {
                         />
                     }
                 />
-                <hr className="w-10/12 my-3" />
+                <hr className="w-10/12 my-3 text-slate-200" />
                 <Accordion
                     title="By Date"
                     children={
                         <div className="flex flex-col gap-5">
                             <div className="flex flex-col flex-shrink-2 gap-1">
-                                <label
-                                    className="text-gray-500 text-sm"
-                                >
+                                <label className="text-gray-500 text-sm">
                                     Start Date
                                 </label>
                                 <input
                                     type="date"
                                     name="from"
-                                    className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
+                                    className="border-slate-200 h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
                                     onChange={handleDateFilterChange}
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
-                                <label
-                                    className="text-gray-500 text-sm"
-                                >
+                                <label className="text-gray-500 text-sm ">
                                     End Date
                                 </label>
                                 <input
                                     type="date"
                                     name="to"
-                                    className="border h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
+                                    className="border-slate-200 h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
                                     onChange={handleDateFilterChange}
                                 />
                             </div>
                         </div>
                     }
                 />
-                <hr className="w-10/12 my-3" />
+                <hr className="w-10/12 my-3 text-slate-200" />
                 <Accordion
                     title="By Price"
                     children={
@@ -155,7 +150,7 @@ function Filters() {
                         </div>
                     }
                 />
-                <hr className="w-10/12 my-3 " />
+                <hr className="w-10/12 my-3 text-slate-200" />
             </div>
             <HackathonList data={filteredHackathons} />
         </div>
