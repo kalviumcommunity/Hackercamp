@@ -15,21 +15,22 @@ export default {
                 93: '93px',
             },
             backgroundImage: {
-                'search-bar-bg-image':
-                        "url('./src/assets/searchBg.png')",
+                'search-bar-bg-image': "url('./src/assets/searchBg.png')",
             },
             colors: {
                 placeholder: '#A0A0A0',
                 title: '#5B5D60',
                 primary: '#006ECC',
                 cards: '#E6EFF7',
-                background:'#f8f9fa'
+                lavender: '#F8F7FA',
+                gray: '#FEFEFE',
+                newgray: '#8C8D8F',
+                emperor: '#555555',
             },
 
             width: {
                 '85rem': '302px',
                 '90rem': '342px',
-     
             },
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
@@ -40,18 +41,22 @@ export default {
             },
             spacing: {
                 88: '88px',
+                1000: '1220px',
+                451: '451px',
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
                 inter: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             padding: {
-                '10%': '10%'
-            }
-            ,
+                '10%': '10%',
+            },
             margin: {
-                '1%':'1%'
-            }
+                '1%': '1%',
+            },
+            scale: {
+                101: '1.009',
+            },
         },
     },
     plugins: [],

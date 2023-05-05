@@ -1,19 +1,19 @@
-import React,{ useState } from 'react'
-import Navbar from './components/navbar/navbar'
-import SearchBar from './components/searchbar/searchBar'
-import ClearFilter from './components/filters/clearFilter';
-import Filters from './components/filters/filters';
+import React from 'react';
+import { Routes, Route } from 'react-router';
+import Homepage from './components/pages/homepage';
+import Details from './components/hackathonDetails/details';
+import data from '../src/components/data.json'
 import './App.css';
 
 function App() {
-  return (
-      <div className="App bg-background">
-        
-          <Navbar />
-          <SearchBar />
-          <ClearFilter />
-          <Filters />
-      </div>
-  );
+    return (
+        <div className="App bg-gray">
+            <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/:id" element={<Details data={data} />} />
+            </Routes>
+        </div>
+    );
 }
-export default App
+
+export default App;
