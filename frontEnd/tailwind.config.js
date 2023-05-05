@@ -21,11 +21,12 @@ export default {
                 placeholder: '#A0A0A0',
                 title: '#5B5D60',
                 primary: '#006ECC',
-                cards: '#E6EFF7',
+                // cards: '#DFF0F9',
                 lavender: '#F8F7FA',
                 gray: '#FEFEFE',
                 newgray: '#8C8D8F',
                 emperor: '#555555',
+                blackish: '#848484',
             },
 
             width: {
