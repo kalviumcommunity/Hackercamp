@@ -9,7 +9,7 @@ function Accordion({ title, children }) {
                 className={`flex  justify-between items-center`}
                 onClick={() => setIsActive(!isActive)}
             >
-                <p className="font-semibold text-title text-lg">{title}</p>
+                <p className="font-medium text-title text-md">{title}</p>
                 <div className="cursor-pointer">
                     <img
                         src={plusIcon}
