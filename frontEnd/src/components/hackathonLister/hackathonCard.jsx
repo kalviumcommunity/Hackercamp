@@ -10,7 +10,7 @@ function HackathonCard({ hackathon }) {
             <Link to={`/${hackathon.id}`}>
                 <div
                     key={hackathon.id}
-                    className=" bg-cards my-6 flex items-center justify-around font-roboto rounded hover:drop-shadow-lg hover:bg-blue-100 hover:scale-101 transition-transform ease-out duration-500"
+                    className="bg-slate-100 my-6 flex items-center justify-around font-roboto rounded hover:drop-shadow-lg hover:bg-slate-200 hover:scale-101 transition-transform ease-out duration-500"
                 >
                     <div>
                         <img
@@ -36,7 +36,7 @@ function HackathonCard({ hackathon }) {
                             <img src={dotIcon} alt="" className="h-3 " />
                             <HandleTime time={hackathon.time} />
                         </div>
-                        <div className="flex gap-1 items-center text-15 font-roboto  text-[#848484]">
+                        <div className="flex gap-1 items-center text-15 font-roboto  text-blackish">
                             <span>{hackathon.location}</span>
                             <img src={dotIcon} alt="" className="h-3 " />
                             <span>{hackathon.price} entry</span>

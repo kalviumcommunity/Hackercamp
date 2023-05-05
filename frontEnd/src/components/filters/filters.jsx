@@ -100,7 +100,7 @@ function Filters({hackathon}) {
                     children={
                         <div className="flex flex-col gap-5">
                             <div className="flex flex-col flex-shrink-2 gap-1">
-                                <label className="text-gray-500 text-sm">
+                                <label className="text-slate-500 text-sm">
                                     Start Date
                                 </label>
                                 <input
@@ -111,7 +111,7 @@ function Filters({hackathon}) {
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
-                                <label className="text-gray-500 text-sm ">
+                                <label className="text-slate-500 text-sm">
                                     End Date
                                 </label>
                                 <input
