@@ -10,7 +10,7 @@ function HackathonCard({ hackathon }) {
             <Link to={`/${hackathon.id}`}>
                 <div
                     key={hackathon.id}
-                    className="bg-slate-100 my-6 flex items-center justify-around font-roboto rounded hover:drop-shadow-lg hover:bg-slate-200 hover:scale-101 transition-transform ease-out duration-500"
+                    className="bg-slate-100 my-6 flex items-center justify-around font-roboto rounded z-0 hover:drop-shadow-lg hover:bg-slate-200 hover:scale-101 transition-transform ease-out duration-500"
                 >
                     <div>
                         <img

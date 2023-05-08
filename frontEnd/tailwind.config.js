@@ -13,6 +13,7 @@ export default {
             inset: {
                 400: '400px',
                 93: '93px',
+                39: '155px',
             },
             backgroundImage: {
                 'search-bar-bg-image': "url('./src/assets/searchBg.png')",
@@ -27,11 +28,16 @@ export default {
                 newgray: '#8C8D8F',
                 emperor: '#555555',
                 blackish: '#848484',
+                whitegray: '#D5D5D5',
+                graywhite: '#FAFAFA',
+                seablue: '#3583ff',
             },
 
             width: {
                 '85rem': '302px',
                 '90rem': '342px',
+                37: '594px',
+                687: '1040px',
             },
             boxShadow: {
                 '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
@@ -43,7 +49,8 @@ export default {
             spacing: {
                 88: '88px',
                 1000: '1220px',
-                451: '451px',
+                451: '551px',
+                112:'680px'
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
@@ -54,6 +61,7 @@ export default {
             },
             margin: {
                 '1%': '1%',
+                100: '500px',
             },
             scale: {
                 101: '1.009',
