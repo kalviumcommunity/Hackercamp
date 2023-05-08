@@ -3,7 +3,7 @@ import Navbar from '../navbar/navbar';
 import searchIcon from '../../assets/searchIcon.png';
 function SearchBar() {
     return (
-        <div>
+        <div className='fixed w-full top-16 z-30 w-1000'>
             <div className="h-52 bg-cover flex flex-col items-center justify-center gap-4 bg-search-bar-bg-image">
                 <h1 className="text-slate-500 font-semibold font-roboto text-slogan">
                     Innovate and Elevate: Find Your Perfect Hackathons.
