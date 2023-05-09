@@ -46,7 +46,7 @@ function HackathonCreation() {
                   </p>
               </div>
           </div>
-          <div className="h-screen w-4/6 ml-100 mt-1 flex flex-col items-center font-roboto">
+          <div className="h-screen w-4/6 ml-500 mt-1 flex flex-col items-center font-roboto">
               <div className="h-2 w-37 bg-primary">&nbsp;</div>
               <div className="w-37 border-slate-200 border-2">
                   <div className="py-3">
@@ -113,7 +113,7 @@ function HackathonCreation() {
                               name=""
                               id=""
                               placeholder="Be clear and descriptive"
-                              className="bg-graywhite  w-12/12 border-whitegray border focus: outline-blue pl-4"
+                              className="bg-graywhite  w-12/12 border-whitegray pt-2 border focus: outline-blue pl-4"
                           ></textarea>
                       </div>
                       <div className="font-roboto flex flex-col w-11/12 mb-4">
@@ -127,12 +127,12 @@ function HackathonCreation() {
                               name=""
                               id=""
                               placeholder="use this space to provide additional details"
-                              className="bg-graywhite  w-12/12 border-whitegray border focus: outline-blue pl-4 "
+                              className="bg-graywhite  w-12/12 border-whitegray border pt-2 focus: outline-blue-300 pl-4 "
                           ></textarea>
                       </div>
                   </div>
                   <div>
-                      <button  className="bg-seablue m-auto block h-10 w-56 rounded text-white my-4    hover:bg-blue-600">
+                      <button className="bg-seablue m-auto block h-10 w-56 rounded text-white my-4    hover:bg-blue-600">
                           Register Hackathon
                       </button>
                   </div>

@@ -43,7 +43,7 @@ function HackathonCard({ hackathon }) {
                         </div>
                         <div className="flex gap-2">
                             {hackathon.tags.map((tag) => (
-                                <span className="font-medium text-primary">
+                                <span key={tag} className="font-medium text-primary">
                                     #{tag}
                                 </span>
                             ))}

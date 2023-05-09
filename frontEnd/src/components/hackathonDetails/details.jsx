@@ -16,7 +16,7 @@ function Details({ data }) {
                     <img
                         src={hackathon.image}
                         alt=""
-                        className="h-451 w-1000 rounded"
+                        className="h-551 w-1220 rounded"
                     />
                 </div>
                 <div className="flex gap-2 items-center text-emperor font-medium text-sm mt-5">

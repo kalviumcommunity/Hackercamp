@@ -10,7 +10,6 @@ function Homepage() {
         <div>
             <Navbar />
             <SearchBar /> 
-            {/* <ClearFilter /> */}
             <Filters hackathon={data} />
         </div>
     );

@@ -22,7 +22,6 @@ export default {
                 placeholder: '#A0A0A0',
                 title: '#5B5D60',
                 primary: '#006ECC',
-                // cards: '#DFF0F9',
                 lavender: '#F8F7FA',
                 gray: '#FEFEFE',
                 newgray: '#8C8D8F',
@@ -48,9 +47,9 @@ export default {
             },
             spacing: {
                 88: '88px',
-                1000: '1220px',
-                451: '551px',
-                112:'680px'
+                1220: '1220px',
+                551: '551px',
+                680:'680px'
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
@@ -61,7 +60,7 @@ export default {
             },
             margin: {
                 '1%': '1%',
-                100: '500px',
+                500: '500px',
             },
             scale: {
                 101: '1.009',
