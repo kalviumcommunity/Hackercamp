@@ -13,7 +13,6 @@ export default {
             inset: {
                 400: '400px',
                 93: '93px',
-                39: '155px',
             },
             backgroundImage: {
                 'search-bar-bg-image': "url('./src/assets/searchBg.png')",
@@ -33,13 +32,7 @@ export default {
             },
 
             width: {
-                '85rem': '302px',
-                '90rem': '342px',
-                37: '594px',
-                687: '1040px',
-            },
-            boxShadow: {
-                '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
+                594: '594px',
             },
 
             height: {
@@ -63,7 +56,7 @@ export default {
                 500: '500px',
             },
             scale: {
-                101: '1.009',
+                1.009: '1.009',
             },
         },
     },
