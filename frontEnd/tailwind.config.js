@@ -6,7 +6,7 @@ export default {
     theme: {
         extend: {
             fontSize: {
-                slogan: '28px',
+                28: '28px',
                 22.5: '22.5px',
                 15: '15px',
             },
