@@ -6,7 +6,7 @@ export default {
     theme: {
         extend: {
             fontSize: {
-                slogan: '28px',
+                28: '28px',
                 22.5: '22.5px',
                 15: '15px',
             },
@@ -21,20 +21,18 @@ export default {
                 placeholder: '#A0A0A0',
                 title: '#5B5D60',
                 primary: '#006ECC',
-                // cards: '#DFF0F9',
                 lavender: '#F8F7FA',
                 gray: '#FEFEFE',
                 newgray: '#8C8D8F',
                 emperor: '#555555',
                 blackish: '#848484',
+                whitegray: '#D5D5D5',
+                graywhite: '#FAFAFA',
+                seablue: '#3583ff',
             },
 
             width: {
-                '85rem': '302px',
-                '90rem': '342px',
-            },
-            boxShadow: {
-                '3xl': '0 2px 62x -15px rgba(0, 0, 0, 0.3)',
+                594: '594px',
             },
 
             height: {
@@ -42,8 +40,9 @@ export default {
             },
             spacing: {
                 88: '88px',
-                1000: '1220px',
-                451: '451px',
+                1220: '1220px',
+                551: '551px',
+                680:'680px'
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
@@ -54,9 +53,10 @@ export default {
             },
             margin: {
                 '1%': '1%',
+                500: '500px',
             },
             scale: {
-                101: '1.009',
+                1.009: '1.009',
             },
         },
     },

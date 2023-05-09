@@ -64,7 +64,6 @@ function Filters({hackathon}) {
                  } else if (to) {
                      return hackathonDate <= to;
                  }
-
                  return true; // return true for all other cases
              });
          setFilteredHackathon(filteredHackathons);
@@ -72,8 +71,8 @@ function Filters({hackathon}) {
 
 
     return (
-        <div className="flex px-10%">
-            <div className="flex flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-4/12  bg-white">
+        <div className="px-10% relative top-72 bg-slate-600">
+            <div className="flex fixed z-30 h-full  flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-3/12  bg-white">
                 <Accordion
                     title="By Theme tags"
                     children={
@@ -150,9 +149,11 @@ function Filters({hackathon}) {
                         </div>
                     }
                 />
-                <hr className="w-10/12 my-3 text-slate-200" />
+                <hr className="w-9/12 my-3 text-slate-200" />
             </div>
-            <HackathonList data={filteredHackathons} />
+            <div className='w-8/12 absolute left-1/3'>
+                <HackathonList data={filteredHackathons} />
+            </div>
         </div>
     );
 }
