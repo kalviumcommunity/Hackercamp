@@ -47,8 +47,8 @@ function HackathonCreation() {
               </div>
           </div>
           <div className="h-screen w-4/6 ml-500 mt-1 flex flex-col items-center font-roboto">
-              <div className="h-2 w-37 bg-primary">&nbsp;</div>
-              <div className="w-37 border-slate-200 border-2">
+              <div className="h-2 w-594 bg-primary">&nbsp;</div>
+              <div className="w-594 border-slate-200 border-2">
                   <div className="py-3">
                       <h1 className="text-center text-3xl font-semibold">
                           Register your hackathon
@@ -59,73 +59,69 @@ function HackathonCreation() {
                       <div className="flex justify-between w-11/12 mb-4">
                           <div>
                               <label
-                                  htmlFor=""
+                                  htmlFor="Hackathon Entry"
                                   className="font-semibold text-base mb-2"
                               >
                                   Hackathon Entry
                               </label>
                               <div className="flex gap-2">
                                   <input type="checkbox" />
-                                  <label htmlFor="">Free</label>
+                                  <label htmlFor="Free">Free</label>
                               </div>
                               <div className="flex gap-2">
                                   <input type="checkbox" />
-                                  <label htmlFor="">Paid</label>
+                                  <label htmlFor="Paid">Paid</label>
                               </div>
                           </div>
                           <div className="flex flex-col pr-16 relative">
                               <label
-                                  htmlFor=""
+                                  htmlFor="Hackathon Poster"
                                   className="font-semibold text-base mb-2"
                               >
                                   Hackathon Poster
                               </label>
                               <input
                                   type="file"
-                                  name=""
-                                  id=""
+                                  name="Hackathon Poster"
                                   className="bg-blue-200 w-72 px-2 py-1 rounded border-2 border-whitegray"
                               />
                           </div>
                       </div>
                       <div className="font-roboto flex flex-col w-11/12 mb-4">
                           <label
-                              htmlFor=""
+                              htmlFor="Hackathon Date"
                               className="font-semibold text-base mb-2"
                           >
                               Hackathon date
                           </label>
                           <input
                               type="date"
-                              name=""
-                              id=""
+                              name="Hackathon Date"
                               className="h-12 border border-whitegray pl-6 rounded placeholder:text-sm  focus: outline-blue-300"
                           />
                       </div>
                       <div className="font-roboto flex flex-col w-11/12 mb-4">
                           <label
-                              htmlFor=""
+                              htmlFor="Hackathon Description"
                               className="font-semibold text-base mb-2"
                           >
                               Hackathon Description
                           </label>
                           <textarea
-                              name=""
-                              id=""
+                              name="Hackathon Description"
                               placeholder="Be clear and descriptive"
                               className="bg-graywhite  w-12/12 border-whitegray pt-2 border focus: outline-blue pl-4"
                           ></textarea>
                       </div>
                       <div className="font-roboto flex flex-col w-11/12 mb-4">
                           <label
-                              htmlFor=""
+                              htmlFor="Hackathon Details"
                               className="font-semibold text-base mb-2"
                           >
                               Hackathon Details
                           </label>
                           <textarea
-                              name=""
-                              id=""
+                              name="Hackathon Details"
                               placeholder="use this space to provide additional details"
                               className="bg-graywhite  w-12/12 border-whitegray border pt-2 focus: outline-blue-300 pl-4 "
                           ></textarea>
