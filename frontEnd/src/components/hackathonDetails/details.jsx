@@ -11,12 +11,12 @@ function Details({ data }) {
     return (
         <div>
             <Navbar />
-            <div className="flex flex-col px-10%">
+            <div className="flex flex-col px-10% relative top-14">
                 <div>
                     <img
                         src={hackathon.image}
                         alt=""
-                        className="h-451 w-1000 rounded"
+                        className="h-551 w-1220 rounded"
                     />
                 </div>
                 <div className="flex gap-2 items-center text-emperor font-medium text-sm mt-5">
@@ -97,7 +97,7 @@ function Details({ data }) {
                     <h3 className="font-semibold text-primary text-2xl pb-2">
                         About the Event
                     </h3>
-                    <p className="leading-7 text-emperor">
+                    <p className="leading-7 text-emperor mb-8">
                         {hackathon.details}
                     </p>
                 </div>

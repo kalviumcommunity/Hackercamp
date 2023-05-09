@@ -9,8 +9,7 @@ function Homepage() {
     return (
         <div>
             <Navbar />
-            <SearchBar />
-            <ClearFilter />
+            <SearchBar /> 
             <Filters hackathon={data} />
         </div>
     );
