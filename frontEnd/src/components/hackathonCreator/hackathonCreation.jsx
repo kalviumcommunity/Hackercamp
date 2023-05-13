@@ -136,8 +136,10 @@ function HackathonCreation() {
                 />
                 {formik.touched[field.name] &&
                     formik.errors[field.name] && ( // conditionally render error message
-                        <span className="text-red-500 font-medium text-sm
-                        ">
+                        <span
+                            className="text-red-500 font-medium text-sm
+                        "
+                        >
                             {formik.errors[field.name]}
                         </span>
                     )}
