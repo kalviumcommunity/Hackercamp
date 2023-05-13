@@ -16,10 +16,10 @@ function Details({ data }) {
                     <img
                         src={hackathon.image}
                         alt=""
-                        className="h-551 w-1220 rounded"
+                        className="h-100 w-1220 rounded"
                     />
                 </div>
-                <div className="flex gap-2 items-center text-emperor font-medium text-sm mt-5">
+                <div className="flex gap-2 items-center text-emperor font-bold text-sm mt-5">
                     <span>
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
@@ -29,7 +29,7 @@ function Details({ data }) {
                     ))}
                 </div>
                 <div className="mt-3">
-                    <h1 className="font-bold text-5xl text-primary">
+                    <h1 className="font-bold text-3xl text-primary">
                         {hackathon.name}
                     </h1>
                     <p className="text-15 mt-3 text-newgray font-medium">
