@@ -14,4 +14,3 @@ function Homepage({data}) {
 }
 
 export default Homepage;
-
