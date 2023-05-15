@@ -2,38 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import DatePicker from 'react-datepicker';
+
 import * as yup from 'yup';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 function HackathonCreation() {
     const validateRequired = (fieldName, value) => {
-        const validTechnologies = [
-            'AI',
-            'ML',
-            'Blockchain',
-            'IoT',
-            'AR/VR',
-            'Cloud Computing',
-        ];
-        if (!value) {
+        if (value === '') {
             return `Required*`;
         } else if (
             fieldName === 'HackathonName' &&
             (value.length > 25 || value.length < 5)
         ) {
             return `Hackathon name character length should be between 5 and 25`;
-        } else if (
-            fieldName === 'HackathonTheme' &&
-            !validTechnologies.includes(value.toUpperCase())
-        ) {
-            return `${value} is not a valid technology`;
-        } else if (
-            fieldName === 'HackathonTimings' &&
-            !value.includes('am') &&
-            !value.includes('pm')
-        ) {
-            return `${value} is not valid time. Please include am or pm`;
         } else if (fieldName === 'HackathonAddress' && value.length > 30) {
             return `${fieldName} should not be more than 230 charcters`;
         }
@@ -43,25 +25,27 @@ function HackathonCreation() {
         checkBoxOption: yup
             .array()
             .min(1, 'At least one option must be selected'),
+        themeOption: yup.array().min(1, 'At least one option must be selected'),
     });
 
     const formik = useFormik({
         initialValues: {
             HackathonName: '',
-            HackathonTheme: '',
-            HackathonTimings: '',
             HackathonMode: '',
             HackathonAddress: '',
             OrganisationName: '',
             date: '',
+            // hackathonTimings: '',
             HackathonDescription: '',
             HackathonDetails: '',
             checkBoxOption: [],
+            themeOption: [],
         },
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
         },
-
+        validateOnChange: false,
+        validateOnBlur: false,
         validate: (values) => {
             const errors = {};
             // This is to validate fields which were created using createFields function
@@ -80,18 +64,6 @@ function HackathonCreation() {
             name: 'HackathonName',
             type: 'text',
             placeholder: 'Enter hackathon name',
-        },
-        {
-            label: 'Hackathon Theme',
-            name: 'HackathonTheme',
-            type: 'text',
-            placeholder: 'Eg., ai, ml',
-        },
-        {
-            label: 'Hackathon Timings',
-            name: 'HackathonTimings',
-            type: 'text',
-            placeholder: 'Eg., 6pm',
         },
         {
             label: 'Hackathon Mode',
@@ -180,7 +152,7 @@ function HackathonCreation() {
                         onSubmit={formik.handleSubmit}
                     >
                         {createFields()}
-                        <div className="flex font-roboto justify-between w-11/12 mb-4">
+                        <div className="flex font-roboto justify-between   w-11/12 mb-4">
                             <div>
                                 <label
                                     htmlFor="checkBoxOption"
@@ -231,6 +203,73 @@ function HackathonCreation() {
                                 />
                             </div>
                         </div>
+                        <div className="flex font-roboto w-11/12 mb-4">
+                            <div>
+                                <label
+                                    htmlFor="themeOption"
+                                    className="font-semibold text-base mb-4 font-roboto"
+                                >
+                                    Hackathon Themes
+                                </label>
+                                <div className="flex gap-4">
+                                    <div className="flex gap-2">
+                                        <input
+                                            type="checkbox"
+                                            id="ml"
+                                            name="themeOption"
+                                            value="ai"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            disabled={formik.isSubmitting}
+                                        />
+                                        <label htmlFor="ml">ML</label>
+                                    </div>
+                                    <div className="flex gap-2 font-roboto">
+                                        <input
+                                            type="checkbox"
+                                            id="ai"
+                                            name="themeOption"
+                                            value="ai"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            disabled={formik.isSubmitting}
+                                        />
+                                        <label htmlFor="ai">AI</label>
+                                    </div>
+                                    <div className="flex gap-2 font-roboto">
+                                        <input
+                                            type="checkbox"
+                                            id="blockchain"
+                                            name="themeOption"
+                                            value="blockchain"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            disabled={formik.isSubmitting}
+                                        />
+                                        <label htmlFor="blockchain">
+                                            Blockchain
+                                        </label>
+                                    </div>
+                                    <div className="flex gap-2 font-roboto">
+                                        <input
+                                            type="checkbox"
+                                            id="web3.0"
+                                            name="themeOption"
+                                            value="web3.0"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            disabled={formik.isSubmitting}
+                                        />
+                                        <label htmlFor="web3.0">Web3.0</label>
+                                    </div>
+                                </div>
+                                {formik.errors.themeOption ? (
+                                    <span className="text-red-500">
+                                        {formik.errors.themeOption}
+                                    </span>
+                                ) : null}
+                            </div>
+                        </div>
                         <div className="font-roboto flex flex-col w-11/12 mb-4">
                             <label
                                 htmlFor="Hackathon Date"
@@ -259,6 +298,15 @@ function HackathonCreation() {
                         </div>
                         <div className="font-roboto flex flex-col w-11/12 mb-4">
                             <label
+                                htmlFor="Hackathon Date"
+                                className="font-semibold text-base mb-2"
+                            >
+                                Hackathon Timings
+                            </label>
+                            {/* <TimeField label="Basic time field" /> */}
+                        </div>
+                        <div className="font-roboto flex flex-col w-11/12 mb-4">
+                            <label
                                 htmlFor="Hackathon Description"
                                 className="font-semibold text-base mb-2"
                             >
@@ -274,7 +322,7 @@ function HackathonCreation() {
                             ></textarea>
                             {formik.errors.HackathonDescription ? (
                                 <span className="text-red-500">
-                                    {formik.errors[fields.fin]}
+                                    {formik.errors.HackathonDescription}
                                 </span>
                             ) : null}
                         </div>

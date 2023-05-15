@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar/navbar';
 import fullStop from '../../assets/fullStop.png';
 import { useParams } from 'react-router-dom';
 import HandleDate from '../hackathonLister/handleDate';
 import HandleDay from '../hackathonLister/handleDay';
 import HandleTime from '../hackathonLister/handleTime';
-function Details({ data }) {
+
+function Details() {
     const { id } = useParams();
-    const hackathon = data.find((hackathon) => hackathon.id == id);
+    const [hackathon,setNewData]=useState([])
+
+    const fetchData=(url)=>{
+        fetch(url).then((res)=>res.json())
+        .then((res)=>{
+            setNewData(res)
+            console.log(res)    
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    useEffect(()=>{
+        fetchData(`http://localhost:1003/api/hackathons/${id}`);
+    },[])
     return (
         <div>
             <Navbar />
@@ -24,9 +39,8 @@ function Details({ data }) {
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags.map((tag) => (
-                        <span>{tag}</span>
-                    ))}
+                    {hackathon.tags?.map((data) => <span>{data}</span>)}
+                     
                 </div>
                 <div className="mt-3">
                     <h1 className="font-bold text-3xl text-primary">
