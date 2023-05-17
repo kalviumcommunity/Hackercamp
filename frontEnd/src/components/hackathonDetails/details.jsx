@@ -13,8 +13,7 @@ function Details() {
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{
-            setHackathon(res)
-            console.log(res)    
+            setHackathon(res)   
         }).catch((error)=>{
             console.log(error)
         })
