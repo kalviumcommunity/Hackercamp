@@ -3,14 +3,14 @@ import Navbar from '../navbar/navbar';
 import searchIcon from '../../assets/searchIcon.png';
 function SearchBar() {
     return (
-        <div className='fixed w-full top-16 z-30 w-1220'>
+        <div className='fixed w-full top-16 z-30'>
             <div className="h-52 bg-cover flex flex-col items-center justify-center gap-4 bg-search-bar-bg-image">
                 <h1 className="text-slate-500 font-semibold font-roboto text-28">
                     Innovate and Elevate: Find Your Perfect Hackathons.
                 </h1>
                 <div className="abc w-6/12 relative">
                     <input
-                        className="h-inputBox w-full pl-88 h-70 rounded placeholder-gray-400 text-xl focus:outline-blue-300"
+                        className="h-inputBox w-full pl-88 h-14 rounded placeholder-gray-400 text-base focus:outline-blue-300"
                         type="text"
                         placeholder="Search your favourite hackathons"
                     />

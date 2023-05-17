@@ -1,16 +1,14 @@
 import Navbar from '../navbar/navbar';
 import SearchBar from '../searchbar/searchBar';
-import ClearFilter from '../filters/clearFilter';
 import Filters from '../filters/filters';
-import data from '../data.json'
 import React from 'react';
 
-function Homepage() {
+function Homepage({data}) {
     return (
         <div>
             <Navbar />
-            <SearchBar /> 
-            <Filters hackathon={data} />
+            <SearchBar />
+            <Filters hackathon={data}/>
         </div>
     );
 }

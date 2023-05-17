@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar/navbar';
 import fullStop from '../../assets/fullStop.png';
 import { useParams } from 'react-router-dom';
 import HandleDate from '../hackathonLister/handleDate';
 import HandleDay from '../hackathonLister/handleDay';
 import HandleTime from '../hackathonLister/handleTime';
-function Details({ data }) {
+
+function Details() {
     const { id } = useParams();
-    const hackathon = data.find((hackathon) => hackathon.id == id);
+    const [hackathon,setHackathon]=useState([])
+
+    const fetchData=(url)=>{
+        fetch(url).then((res)=>res.json())
+        .then((res)=>{
+            setHackathon(res)   
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    useEffect(()=>{
+        fetchData(`http://localhost:1003/api/hackathons/${id}`);
+    },[])
     return (
         <div>
             <Navbar />
@@ -16,20 +30,19 @@ function Details({ data }) {
                     <img
                         src={hackathon.image}
                         alt=""
-                        className="h-551 w-1220 rounded"
+                        className="h-100 w-1220 rounded"
                     />
                 </div>
-                <div className="flex gap-2 items-center text-emperor font-medium text-sm mt-5">
+                <div className="flex gap-2 items-center text-emperor font-bold text-sm mt-5">
                     <span>
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags.map((tag) => (
-                        <span>{tag}</span>
-                    ))}
+                    {hackathon.tags?.map((data) => <span key={data}>{data}</span>)}
+                     
                 </div>
                 <div className="mt-3">
-                    <h1 className="font-bold text-5xl text-primary">
+                    <h1 className="font-bold text-3xl text-primary">
                         {hackathon.name}
                     </h1>
                     <p className="text-15 mt-3 text-newgray font-medium">
