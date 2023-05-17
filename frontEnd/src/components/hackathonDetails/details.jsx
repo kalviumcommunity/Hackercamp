@@ -13,6 +13,7 @@ function Details() {
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{
+            setHackathon(res)   
             setHackathon(res)
             console.log(res)    
         }).catch((error)=>{
@@ -39,8 +40,7 @@ function Details() {
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags?.map((data, index) => <span key={index}>{data}</span>)}
-                     
+                    {hackathon.tags?.map((data, index) => <span key={index}>{data}</span>)}      
                 </div>
                 <div className="mt-3">
                     <h1 className="font-bold text-3xl text-primary">
