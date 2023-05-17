@@ -8,12 +8,12 @@ import HandleTime from '../hackathonLister/handleTime';
 
 function Details() {
     const { id } = useParams();
-    const [hackathon,setNewData]=useState([])
+    const [hackathon,setHackathon]=useState([])
 
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{
-            setNewData(res)
+            setHackathon(res)
             console.log(res)    
         }).catch((error)=>{
             console.log(error)
