@@ -1,12 +1,12 @@
 const mockedData = require("../../frontEnd/src/components/data.json");
 const express = require("express");
 const app = express();
-const port = 1003;
+const port = 2003;
 
 app.use((req, res, next) => {
-  const allowedOrigins = ["http://localhost:1003", "http://localhost:3001"];
+  const allowedOrigins = "http://localhost:1002";
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  if (allowedOrigins === origin) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   next();

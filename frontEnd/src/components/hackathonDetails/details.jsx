@@ -8,12 +8,12 @@ import HandleTime from '../hackathonLister/handleTime';
 
 function Details() {
     const { id } = useParams();
-    const [hackathon,setNewData]=useState([])
+    const [hackathon,setHackathon]=useState([])
 
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{
-            setNewData(res)
+            setHackathon(res)
             console.log(res)    
         }).catch((error)=>{
             console.log(error)
@@ -21,7 +21,7 @@ function Details() {
     }
 
     useEffect(()=>{
-        fetchData(`http://localhost:1003/api/hackathons/${id}`);
+        fetchData(`http://localhost:2003/api/hackathons/${id}`);
     },[])
     return (
         <div>
@@ -39,7 +39,7 @@ function Details() {
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags?.map((data) => <span>{data}</span>)}
+                    {hackathon.tags?.map((data, index) => <span key={index}>{data}</span>)}
                      
                 </div>
                 <div className="mt-3">

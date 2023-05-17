@@ -1,6 +1,6 @@
 export default {
     // other config options...
     server: {
-        port: 1000,
+        port: 1001,
     },
 };
