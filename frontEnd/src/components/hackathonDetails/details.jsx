@@ -38,7 +38,7 @@ function Details() {
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags?.map((data) => <span>{data}</span>)}
+                    {hackathon.tags?.map((data) => <span key={data}>{data}</span>)}
                      
                 </div>
                 <div className="mt-3">
