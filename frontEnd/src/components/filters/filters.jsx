@@ -41,9 +41,9 @@ function Filters({hackathon}) {
              ? (filteredHackathons = filteredHackathons.filter(
                    (hackathon) =>
                        (checkboxes.paid &&
-                           hackathon.price.toLowerCase().includes('paid')) ||
+                           hackathon.price.includes('Paid')) ||
                        (checkboxes.free &&
-                           hackathon.price.toLowerCase().includes('free'))
+                           hackathon.price.includes('Free'))
                ))
              : null;
 
@@ -72,7 +72,7 @@ function Filters({hackathon}) {
 
     return (
         <div className="px-10% relative top-72 bg-slate-600">
-            <div className="flex fixed z-30 h-full  flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-3/12  bg-white">
+            <div className="flex fixed z-30 h-full  flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-3/12  bg-white  md:flex-col">
                 <Accordion
                     title="By Theme tags"
                     children={
@@ -151,7 +151,7 @@ function Filters({hackathon}) {
                 />
                 <hr className="w-9/12 my-3 text-slate-200" />
             </div>
-            <div className='w-8/12 absolute left-1/3'>
+            <div className="w-8/12 absolute left-1/3">
                 <HackathonList data={filteredHackathons} />
             </div>
         </div>
