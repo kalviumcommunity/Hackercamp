@@ -20,7 +20,7 @@ function Details() {
     }
 
     useEffect(()=>{
-        fetchData(`http://localhost:1003/api/hackathons/${id}`);
+        fetchData(`http://localhost:2003/api/hackathons/${id}`);
     },[])
     return (
         <div>

@@ -1,46 +1,30 @@
 const express = require("express");
-const app = express();
-const port = 2003;
-const cors = require("cors");
 const multer = require("multer");
-const upload = multer({storage: multer.memoryStorage() });
 const axios = require("axios");
 const FormData = require("form-data");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-const mockedData = require("../../frontEnd/src/components/data.json");
+const app = express();
+const upload = multer({ storage: multer.memoryStorage() });
 
-app.use(cors());
-
-app.get("/api/hackathons", (req, res) => {
-  res.json(mockedData);
-});
-
-app.get("/api/hackathons/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const filteredHackathons = mockedData.find(
-    (hackathons) => hackathons.id === id
-  );
-  res.json(filteredHackathons);
-});
-
+// Swagger configuration
 const swaggerOptions = {
-  definition: {
+  swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "Hackathon API",
+      title: "Image Upload API",
       version: "1.0.0",
-      description: "API to manage hackathons",
+      description: "API to upload an image and get the image URL",
     },
   },
-  apis:[__filename], // Specify the file path where your API routes are defined
+  apis: [__filename], // Current file path
 };
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
 
 // Endpoint for Swagger UI
-app.use("/api-docs", swaggerUi.serve);
-app.get("/api-docs", swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Endpoint for uploading an image
 /**
    @swagger
@@ -85,15 +69,14 @@ app.get("/api-docs", swaggerUi.setup(swaggerSpec));
  *                 message:
  *                   type: string
  */
-
-app.post("/api/upload", upload.single("image"), async (req, res) => {
+app.post("/upload", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded" });
     }
 
     const formData = new FormData();
-    formData.append("key", "3dd3fe88bdc8cdf501df198a423f3dd1"); // Replace with your ImgBB API key
+    formData.append("key", "1daf95afec18702530cb2be9fb520593"); // Replace with your ImgBB API key
     formData.append("image", req.file.buffer.toString("base64"));
 
     const response = await axios.post(
@@ -113,6 +96,7 @@ app.post("/api/upload", upload.single("image"), async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+// Start the server
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
 });

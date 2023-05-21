@@ -9,6 +9,7 @@
         "build": "vite build",
         "preview": "vite preview"
     },
+    "proxy": "http://localhost:2003",
     "dependencies": {
         "formik": "^2.2.9",
         "react": "^18.2.0",
