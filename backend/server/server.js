@@ -3,116 +3,94 @@ const app = express();
 const port = 2003;
 const cors = require("cors");
 const multer = require("multer");
-const upload = multer({storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() });
 const axios = require("axios");
 const FormData = require("form-data");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
-
 const mockedData = require("../../frontEnd/src/components/data.json");
-
+const mongoose = require("mongoose");
+const Hackathon = require("./HackathonModel");
 app.use(cors());
 
-app.get("/api/hackathons", (req, res) => {
-  res.json(mockedData);
+const dbURL =
+  "mongodb+srv://jeeva:jeeva@cluster0.arulafj.mongodb.net/HackathonDB";
+mongoose
+  .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => app.listen(port))
+  .catch((error) => console.log(error));
+
+app.get("/api/hackathons/", (req, res) => {
+  Hackathon.find()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.error("Error retrieving data from MongoDB:", error);
+      res.status(500).json({ message: "Error retrieving data" });
+    });
 });
-
-app.get("/api/hackathons/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const filteredHackathons = mockedData.find(
-    (hackathons) => hackathons.id === id
-  );
-  res.json(filteredHackathons);
-});
-
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Hackathon API",
-      version: "1.0.0",
-      description: "API to manage hackathons",
-    },
-  },
-  apis:[__filename], // Specify the file path where your API routes are defined
-};
-const swaggerSpec = swaggerJsDoc(swaggerOptions);
-
-// Endpoint for Swagger UI
-app.use("/api-docs", swaggerUi.serve);
-app.get("/api-docs", swaggerUi.setup(swaggerSpec));
-// Endpoint for uploading an image
-/**
-   @swagger
- * /upload:
- *   post:
- *     summary: Upload an image and get the image URL
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               image:
- *                 type: string
- *                 format: binary
- *     responses:
- *       200:
- *         description: Image uploaded successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 imageUrl:
- *                   type: string
- *       400:
- *         description: No image uploaded
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *       500:
- *         description: Something went wrong
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- */
-
-app.post("/api/upload", upload.single("image"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ message: "No image uploaded" });
-    }
-
-    const formData = new FormData();
-    formData.append("key", "3dd3fe88bdc8cdf501df198a423f3dd1"); // Replace with your ImgBB API key
-    formData.append("image", req.file.buffer.toString("base64"));
-
-    const response = await axios.post(
-      "https://api.imgbb.com/1/upload",
-      formData,
-      {
-        headers: formData.getHeaders(),
+app.post(
+  "/api/hackathons/",
+  upload.single("Poster"),
+  async (req, res) => {
+    try {      
+      // Upload the hackathon poster image
+      if (!req.file) {
+        return res.status(400).json({ message: "No image uploaded" });
       }
-    );
 
-    const imageUrl = response.data.data.url;
-    console.log(imageUrl);
-    return res.status(200).json({ imageUrl });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Something went wrong" });
+      const formData = new FormData();
+      formData.append("key", "3dd3fe88bdc8cdf501df198a423f3dd1"); // Replace with your ImgBB API key
+      formData.append("image", req.file.buffer.toString("base64"));
+
+      const response = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        formData,
+        {
+          headers: formData.getHeaders(),
+        }
+      );
+      
+      const ImageUrl = response.data.data.url;
+
+      // Create a new instance of the Hackathon model
+      const hackathon = new Hackathon({
+        Name: req.body.Name,
+        Mode: req.body.Mode,
+        Address: req.body.Address,
+        Poster: ImageUrl,
+        Organisation: req.body.Organiser,
+        Date: req.body.Date,
+        Timings: req.body.Timings,
+        PaymentMode: req.body.Price,
+        Themes: req.body.Themes,
+        Description: req.body.Description,
+        Details: req.body.Details,
+        Slug:req.body.Name.toLowerCase().replace(/\s/g, '')+Math.random()*1
+      });
+
+      // Save the hackathon to the database
+      const savedHackathon = await hackathon.save();
+
+      res.status(200).json(savedHackathon);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error saving hackathon" });
+    }
   }
+);
+
+app.get("/api/hackathons/:slug/:slugValue", (req, res) => {
+  const slug = req.params.slug
+  const slugValue = req.params.slugValue
+  const query = {};
+  query[slug] = slugValue
+ Hackathon.find(query)
+   .then((data) => {
+     res.status(200).json(data);
+   })
+   .catch((error) => {
+     console.error("Error retrieving data from MongoDB:", error);
+     res.status(500).json({ message: "Error retrieving data" });
+   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});

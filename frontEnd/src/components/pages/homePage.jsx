@@ -13,10 +13,11 @@ function Homepage() {
       }
     useEffect(() => {
         fetchData();
+
     }, []);
 
     const filteredHackathons = data.filter((_data) => {
-        return _data.name.toLowerCase().includes(search.toLowerCase());
+        return _data.Name.toLowerCase().includes(search.toLowerCase());
     });
     return (
         <div>

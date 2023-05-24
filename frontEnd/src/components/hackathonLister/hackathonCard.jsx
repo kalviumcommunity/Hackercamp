@@ -7,44 +7,48 @@ import dotIcon from '../../assets/fullStop.png';
 function HackathonCard({ hackathon }) {
     return (
         <>
-            <Link to={`/${hackathon.id}`}>
+            <Link to={`/${hackathon.Slug}`}>
                 <div
-                    key={hackathon.id}
+                    key={hackathon.Slug}
                     className="bg-slate-100 my-6 flex items-center justify-around font-roboto rounded z-0 hover:drop-shadow-lg hover:bg-slate-200 hover:scale-1.009 transition-transform ease-out duration-500"
                 >
                     <div>
                         <img
-                            src={hackathon.image}
-                            key={hackathon.id}
+                            src={hackathon.Poster}
+                            key={hackathon.Poster}
                             className="my-5 rounded h-40"
                         />
                     </div>
                     <div className="flex flex-col w-2/5 gap-3  px-3.5 py-2 rounded">
                         <div className="relative">
                             <p className="text-title text-22.5 font-semibold font-roboto">
-                                {hackathon.name}
+                                {hackathon.Name}
                             </p>
                         </div>
 
                         <div className="flex gap-1 items-center text-15 font-medium text-primary">
-                            <HandleDay date={hackathon.date} format={'short'} />
+                            <HandleDay date={hackathon.Date} format={'short'} />
+                            {console.log(hackathon.Date)}
                             <img src={dotIcon} alt="" className="h-3 " />
                             <HandleDate
-                                date={hackathon.date}
+                                date={hackathon.Date}
                                 format={'short'}
                             />
                             <img src={dotIcon} alt="" className="h-3 " />
-                            <HandleTime time={hackathon.time} />
+                            <HandleTime time={hackathon.Timings} />
                         </div>
                         <div className="flex gap-1 items-center text-15 font-roboto  text-blackish">
-                            <span>{hackathon.location}</span>
-                            <img src={dotIcon} alt="" className="h-3 " />
-                            <span>{hackathon.price} entry</span>
+                            <span>{hackathon.Address}</span>
+                            {/* <img src={dotIcon} alt="" className="h-3 " /> */}
+                            <span>{hackathon.PaymentMode} entry</span>
                         </div>
                         <div className="flex gap-2">
-                            {hackathon.tags.map((tag) => (
-                                <span key={tag} className="font-medium text-primary">
-                                    #{tag}
+                            {hackathon.Themes[0].split(',').map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
+                                >
+                                    {tag[0].toUpperCase()+tag.slice(1,tag.length)}
                                 </span>
                             ))}
                         </div>

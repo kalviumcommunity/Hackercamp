@@ -7,7 +7,8 @@ import HandleDay from '../hackathonLister/handleDay';
 import HandleTime from '../hackathonLister/handleTime';
 
 function Details() {
-    const { id } = useParams();
+    const { slug } = useParams();
+    console.log(slug)
     const [hackathon,setHackathon]=useState([])
 
     const fetchData=(url)=>{
@@ -20,7 +21,7 @@ function Details() {
     }
 
     useEffect(()=>{
-        fetchData(`http://localhost:2003/api/hackathons/${id}`);
+        fetchData(`http://localhost:2003/api/hackathons/${slug}`);
     },[])
     return (
         <div>
@@ -28,39 +29,45 @@ function Details() {
             <div className="flex flex-col px-10% relative top-14">
                 <div>
                     <img
-                        src={hackathon.image}
+                        src={hackathon.Poster}
                         alt=""
                         className="h-100 w-1220 rounded"
                     />
                 </div>
                 <div className="flex gap-2 items-center text-emperor font-bold text-sm mt-5">
                     <span>
-                        <HandleDate date={hackathon.date} format={'short'} />
+                        <HandleDate date={hackathon.Date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.tags?.map((data) => <span key={data}>{data}</span>)}
-                     
+                    {hackathon.Themes[0].split(',').map((tag) => (
+                        <span
+                            key={tag}
+                            className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
+                        >
+                            {tag[0].toUpperCase() + tag.slice(1, tag.length)}
+                        </span>
+                    ))}
                 </div>
                 <div className="mt-3">
                     <h1 className="font-bold text-3xl text-primary">
-                        {hackathon.name}
+                        {hackathon.Name}
                     </h1>
                     <p className="text-15 mt-3 text-newgray font-medium">
-                        {hackathon.description}
+                        {hackathon.Description}
                     </p>
                 </div>
                 <div className="mt-8">
                     <div className="bg-lavender h-16 w-52 text-15 flex items-center gap-1 pl-4">
                         <span className="text-slate-500">by</span>
                         <span className="font-bold text-title">
-                            {hackathon.organisation}
+                            {hackathon.Organisation}
                         </span>
                     </div>
                 </div>
                 <div className="mt-8">
                     <div>
                         <h3 className="font-semibold text-primary text-2xl pb-2">
-                            When and Where
+                            hen and Where
                         </h3>
                         <div className="bg-lavender flex justify-around items-center py-4">
                             <div>
@@ -71,7 +78,7 @@ function Details() {
                                     <span>
                                         {
                                             <HandleDay
-                                                date={hackathon.date}
+                                                date={hackathon.Date}
                                                 format={'long'}
                                             />
                                         }
@@ -80,13 +87,13 @@ function Details() {
                                     <span>
                                         {
                                             <HandleDate
-                                                date={hackathon.date}
+                                                date={hackathon.Date}
                                                 format={'long'}
                                             />
                                         }
                                     </span>
                                     <span>
-                                        {new Date(hackathon.date).getFullYear()}
+                                        {new Date(hackathon.Date).getFullYear()}
                                     </span>
                                     <span>,</span>
                                     <span>
@@ -100,7 +107,7 @@ function Details() {
                                     Location
                                 </h4>
                                 <div className="text-15 text-slate-500">
-                                    <span>{hackathon.location}</span>
+                                    <span>{hackathon.Address}</span>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +118,7 @@ function Details() {
                         About the Event
                     </h3>
                     <p className="leading-7 text-emperor mb-8">
-                        {hackathon.details}
+                        {hackathon.Details}
                     </p>
                 </div>
             </div>

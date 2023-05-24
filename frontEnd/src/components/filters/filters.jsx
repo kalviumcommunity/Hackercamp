@@ -32,7 +32,7 @@ function Filters({hackathon}) {
          // Filter by theme
          themeFilter !== ''
              ? (filteredHackathons = filteredHackathons.filter((hackathon) =>
-                   hackathon.tags.includes(themeFilter.toLowerCase())
+                   hackathon.Themes.includes(themeFilter.toLowerCase())
                ))
              : null;
 
@@ -41,15 +41,15 @@ function Filters({hackathon}) {
              ? (filteredHackathons = filteredHackathons.filter(
                    (hackathon) =>
                        (checkboxes.paid &&
-                           hackathon.price.includes('Paid')) ||
+                           hackathon.PaymentMode.includes('Paid')) ||
                        (checkboxes.free &&
-                           hackathon.price.includes('Free'))
+                           hackathon.PaymentMode.includes('Free'))
                ))
              : null;
 
          // Filter by dates
              filteredHackathons = filteredHackathons.filter((hackathon) => {
-                 const hackathonDate = new Date(hackathon.date);
+                 const hackathonDate = new Date(hackathon.Date);
                  const from =
                      dateFilters.from !== ''
                          ? new Date(dateFilters.from)
