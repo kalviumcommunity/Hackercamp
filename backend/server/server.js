@@ -9,6 +9,8 @@ const FormData = require("form-data");
 const mockedData = require("../../frontEnd/src/components/data.json");
 const mongoose = require("mongoose");
 const Hackathon = require("./HackathonModel");
+require("dotenv").config();
+const apiKey = process.env.API_KEY;
 app.use(cors());
 
 const dbURL =
@@ -39,7 +41,7 @@ app.post(
       }
 
       const formData = new FormData();
-      formData.append("key", "3dd3fe88bdc8cdf501df198a423f3dd1"); // Replace with your ImgBB API key
+      formData.append("key",apiKey); // Replace with your ImgBB API key
       formData.append("image", req.file.buffer.toString("base64"));
 
       const response = await axios.post(
