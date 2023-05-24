@@ -17,12 +17,12 @@ mongoose
     HackathonMode: { type: String },
     HackathonAddress: { type: String },
     OrganisationName: { type: String },
-    date: { type: String },
-    timings:{type: String},
+    Date: { type: String },
+    Timings:{type: String},
     HackathonDescription: { type: String },
     HackathonDetails: { type: String },
-    checkBoxOption: { type: [String] },
-    themeOption: { type: [String] },
+    CheckBoxOption: { type: [String] },
+    ThemeOption: { type: [String] },
   });
 
   // Create the model based on the schema
