@@ -44,7 +44,6 @@ app.post("/api/upload", upload.single("image"), async (req, res) => {
     );
 
     const imageUrl = response.data.data.url;
-    console.log(imageUrl);
     return res.status(200).json({ imageUrl });
   } catch (error) {
     console.error(error);
