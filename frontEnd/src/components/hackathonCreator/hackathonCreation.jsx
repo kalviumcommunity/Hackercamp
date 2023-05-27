@@ -10,8 +10,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 
 function HackathonCreation() {
-    const navigate = useNavigate()
-    const [startDate, setStartDate] = useState(new Date());
     const validateRequired = (fieldName, value) => {
         if (value === '') {
             return `Required*`;
@@ -88,7 +86,6 @@ function HackathonCreation() {
                 let err = validateRequired(i, values[i]);
                 if (err) errors[i] = err;
             }
-            console.log(errors);
             return errors;
         },
         // This is to validate field which are radio buttons and checkboxes

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 2003;
+require("dotenv").config();
 const cors = require("cors");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
@@ -9,7 +10,6 @@ const FormData = require("form-data");
 const mockedData = require("../../frontEnd/src/components/data.json");
 const mongoose = require("mongoose");
 const Hackathon = require("./HackathonModel");
-require("dotenv").config();
 const apiKey = process.env.API_KEY;
 app.use(cors());
 console.log(process.env.MONGODB_STR);
