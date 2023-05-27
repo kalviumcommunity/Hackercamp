@@ -14,7 +14,6 @@ const hackathonSchema = new Schema({
   Themes: { type: [String], required: true },
   Description: { type: String, required: true },
   Details: { type: String, required: true },
-  Slug:{type:String}
 });
 
 const Hackathon = mongoose.model("hackathon", hackathonSchema);

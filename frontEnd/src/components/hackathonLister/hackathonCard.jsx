@@ -7,9 +7,9 @@ import dotIcon from '../../assets/fullStop.png';
 function HackathonCard({ hackathon }) {
     return (
         <>
-            <Link to={`/${hackathon.Slug}`}>
+            <Link to={`/${hackathon._id}`}>
                 <div
-                    key={hackathon.Slug}
+                    key={hackathon._id}
                     className="bg-slate-100 my-6 flex items-center justify-around font-roboto rounded z-0 hover:drop-shadow-lg hover:bg-slate-200 hover:scale-1.009 transition-transform ease-out duration-500"
                 >
                     <div>
@@ -28,7 +28,6 @@ function HackathonCard({ hackathon }) {
 
                         <div className="flex gap-1 items-center text-15 font-medium text-primary">
                             <HandleDay date={hackathon.Date} format={'short'} />
-                            {console.log(hackathon.Date)}
                             <img src={dotIcon} alt="" className="h-3 " />
                             <HandleDate
                                 date={hackathon.Date}
@@ -39,16 +38,16 @@ function HackathonCard({ hackathon }) {
                         </div>
                         <div className="flex gap-1 items-center text-15 font-roboto  text-blackish">
                             <span>{hackathon.Address}</span>
-                            {/* <img src={dotIcon} alt="" className="h-3 " /> */}
+                            <img src={dotIcon} alt="" className="h-3 " />
                             <span>{hackathon.PaymentMode} entry</span>
                         </div>
                         <div className="flex gap-2">
-                            {hackathon.Themes[0].split(',').map((tag) => (
+                            {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
                                 <span
                                     key={tag}
                                     className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
                                 >
-                                    {tag[0].toUpperCase()+tag.slice(1,tag.length)}
+                                    {tag}
                                 </span>
                             ))}
                         </div>

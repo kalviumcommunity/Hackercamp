@@ -7,21 +7,21 @@ import HandleDay from '../hackathonLister/handleDay';
 import HandleTime from '../hackathonLister/handleTime';
 
 function Details() {
-    const { slug } = useParams();
-    console.log(slug)
+    const { id  } = useParams();
     const [hackathon,setHackathon]=useState([])
 
+    console.log(hackathon.Themes?.[0]);
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{
-            setHackathon(res)   
+            setHackathon(res)  
         }).catch((error)=>{
-            console.log(error)
+            console.log('Error occured')
         })
     }
 
     useEffect(()=>{
-        fetchData(`http://localhost:2003/api/hackathons/${slug}`);
+        fetchData(`http://localhost:2003/api/hackathons/${id}`);
     },[])
     return (
         <div>
@@ -39,17 +39,17 @@ function Details() {
                         <HandleDate date={hackathon.Date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {hackathon.Themes[0].split(',').map((tag) => (
+                    {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
                         <span
                             key={tag}
                             className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
                         >
-                            {tag[0].toUpperCase() + tag.slice(1, tag.length)}
+                            {tag}
                         </span>
                     ))}
                 </div>
                 <div className="mt-3">
-                    <h1 className="font-bold text-3xl text-primary">
+                    <h1 className="font-bold text-5xl text-primary">
                         {hackathon.Name}
                     </h1>
                     <p className="text-15 mt-3 text-newgray font-medium">
@@ -67,7 +67,7 @@ function Details() {
                 <div className="mt-8">
                     <div>
                         <h3 className="font-semibold text-primary text-2xl pb-2">
-                            hen and Where
+                            When and Where
                         </h3>
                         <div className="bg-lavender flex justify-around items-center py-4">
                             <div>

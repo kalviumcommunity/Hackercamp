@@ -32,7 +32,7 @@ function Filters({hackathon}) {
          // Filter by theme
          themeFilter !== ''
              ? (filteredHackathons = filteredHackathons.filter((hackathon) =>
-                   hackathon.Themes.includes(themeFilter.toLowerCase())
+                   hackathon.Themes[0].includes(themeFilter.toLowerCase())
                ))
              : null;
 

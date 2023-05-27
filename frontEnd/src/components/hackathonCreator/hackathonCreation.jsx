@@ -7,15 +7,17 @@ import SidebarForForms from './sidebarForForms';
 import * as yup from 'yup';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
 
 function HackathonCreation() {
+    const navigate = useNavigate()
     const [startDate, setStartDate] = useState(new Date());
     const validateRequired = (fieldName, value) => {
         if (value === '') {
             return `Required*`;
         } else if (
             fieldName === 'HackathonName' &&
-            (value.length > 25 || value.length < 5)
+            (value.length > 45 || value.length < 5)
         ) {
             return `Hackathon name character length should be between 5 and 25`;
         } else if (fieldName === 'HackathonAddress' && value.length > 30) {
@@ -58,11 +60,14 @@ function HackathonCreation() {
                 formData.append('Organiser', values.OrganisationName);
                 formData.append('Description', values.HackathonDescription);
                 formData.append('Details', values.HackathonDetails);
-                formData.append('Poster', values.HackathonPoster)
-                const response = await fetch('http://localhost:2003/api/hackathons', {
-                    method: 'POST',
-                    body: formData,
-                });
+                formData.append('Poster', values.HackathonPoster);
+                const response = await fetch(
+                    'http://localhost:2003/api/hackathons',
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
 
                 if (!response.ok) {
                     throw new Error('Error saving hackathon');
@@ -70,7 +75,6 @@ function HackathonCreation() {
 
                 const savedHackathon = await response.json();
                 toast.success('Form submitted successfully!');
-                console.log(savedHackathon);
             } catch (error) {
                 console.error(error);
             }
@@ -88,7 +92,7 @@ function HackathonCreation() {
             return errors;
         },
         // This is to validate field which are radio buttons and checkboxes
-        validationSchema
+        validationSchema,
     });
     const fields = [
         {
@@ -399,7 +403,7 @@ function HackathonCreation() {
                                     }}
                                     showTimeSelect
                                     showTimeSelectOnly
-                                    timeIntervals={1}
+                                    timeIntervals={30}
                                     timeCaption="Time"
                                     dateFormat="h:mm aa"
                                     className="h-12 border border-whitegray w-9/12 pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"

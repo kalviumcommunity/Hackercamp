@@ -8,10 +8,10 @@ import './App.css';
 
 function App() {
     return (
-        <div className="bg-gray">
+        <div className="bg-white">
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="/:slug" element={<Details />} />
+                <Route path="/:id" element={<Details />} />
                 <Route path="/organise" element={<HackathonCreation/>} />
             </Routes>
         </div>
