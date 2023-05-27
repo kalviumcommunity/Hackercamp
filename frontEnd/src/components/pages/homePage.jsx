@@ -12,5 +12,4 @@ function Homepage({data}) {
         </div>
     );
 }
-
 export default Homepage;
