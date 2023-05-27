@@ -34,7 +34,7 @@ function Details() {
                     />
                 </div>
                 <div className="flex gap-2 items-center text-emperor font-bold text-sm mt-5">
-                    <span>
+     <span>
                         <HandleDate date={hackathon.date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
