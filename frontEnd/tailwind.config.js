@@ -15,7 +15,7 @@ export default {
                 93: '93px',
             },
             backgroundImage: {
-                'search-bar-bg-image': "url('./src/assets/searchBg.png')",
+                'search-bar-bg-image': "url('/images/searchBg.png')",
             },
             colors: {
                 placeholder: '#A0A0A0',
