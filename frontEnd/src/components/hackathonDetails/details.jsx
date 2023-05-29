@@ -34,9 +34,10 @@ function Details() {
                     />
                 </div>
                 <div className="flex gap-2 items-center text-emperor font-bold text-sm mt-5">
+
                     <span>
                         <HandleDate date={hackathon.Date} format={'short'} />
-                    </span>
+                      <span>
                     <img src={fullStop} className="h-4" />
                     {hackathon.Themes && hackathon.Themes.map((tag) => (
                         <span
