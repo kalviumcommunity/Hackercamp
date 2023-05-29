@@ -18,7 +18,7 @@ function HackathonCard({ hackathon }) {
                         <img
                             src={hackathon.Poster}
                             key={hackathon.Poster}
-                            className="my-5 rounded h-40"
+                            className="my-5 rounded h-40 w-72"
                         />
                     </div>
                     <div className="flex flex-col w-2/5 gap-3  px-3.5 py-2 rounded">
@@ -44,14 +44,14 @@ function HackathonCard({ hackathon }) {
                             <span>{hackathon.PaymentMode} entry</span>
                         </div>
                         <div className="flex gap-2">
-                            {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
+                            {/* {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
                                 <span
                                     key={tag}
                                     className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
                                 >
                                     {tag}
                                 </span>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                 </div>

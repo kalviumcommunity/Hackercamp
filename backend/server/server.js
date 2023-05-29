@@ -8,7 +8,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const axios = require("axios");
 const FormData = require("form-data");
 const Hackathon = require("../models/HackathonModel");
-const connection = require('../models/dbConnection')
+const connection = require('./dbConnection')
 const apiKey = process.env.API_KEY
 app.use(cors());
 
@@ -46,7 +46,7 @@ app.post("/api/hackathons/", upload.single("Poster"), async (req, res) => {
       Date: req.body.Date,
       Timings: req.body.Timings,
       PaymentMode: req.body.Price,
-      Themes: req.body.Themes,
+      Themes: req.body.Themes.split(','),
       Description: req.body.Description,
       Details: req.body.Details,
       Slug: req.body.Name.toLowerCase().replace(/\s/g, ""),

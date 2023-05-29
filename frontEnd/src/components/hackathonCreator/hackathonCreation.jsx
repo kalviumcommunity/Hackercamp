@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
- import { ToastContainer, toast } from 'react-toastify';
- import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import DatePicker from 'react-datepicker';
 import SidebarForForms from './sidebarForForms';
 import * as yup from 'yup';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 
 function HackathonCreation() {
+    const navigate = useNavigate();
     const validateRequired = (fieldName, value) => {
         if (value === '') {
             return `Required*`;
@@ -24,9 +24,11 @@ function HackathonCreation() {
     };
 
     const validationSchema = yup.object({
-        HackathonPrice: yup.string().min(1, 'At least one option must be selected'),
+        HackathonPrice: yup
+            .string()
+            .min(1, 'At least one option must be selected'),
         ThemeOption: yup.array().required('An option must be selected'),
-        HackathonMode: yup.string().required('An option must be selected')
+        HackathonMode: yup.string().required('An option must be selected'),
     });
     const handleFileChange = (event) => {
         formik.setFieldValue('HackathonPoster', event.target.files[0]);
@@ -73,6 +75,9 @@ function HackathonCreation() {
 
                 const savedHackathon = await response.json();
                 toast.success('Form submitted successfully!');
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
             } catch (error) {
                 console.error(error);
             }

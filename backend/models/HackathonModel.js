@@ -16,5 +16,7 @@ const hackathonSchema = new Schema({
   Details: { type: String, required: true },
 });
 
+
+
 const Hackathon = mongoose.model("hackathon", hackathonSchema);
 module.exports = Hackathon;
