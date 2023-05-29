@@ -22,7 +22,7 @@ function Details() {
   };
 
   useEffect(() => {
-    fetchData(`http://localhost:2003/api/hackathons/${id}`);
+    fetchData(`https://hacker-camp.onrender.com/api/hackathons${id}`);
   }, []);
 
   return (

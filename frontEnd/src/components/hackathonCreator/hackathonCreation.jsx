@@ -62,7 +62,7 @@ function HackathonCreation() {
                 formData.append('Details', values.HackathonDetails);
                 formData.append('Poster', values.HackathonPoster);
                 const response = await fetch(
-                    'http://localhost:2003/api/hackathons',
+                    'https://hacker-camp.onrender.com/api/hackathons',
                     {
                         method: 'POST',
                         body: formData,
