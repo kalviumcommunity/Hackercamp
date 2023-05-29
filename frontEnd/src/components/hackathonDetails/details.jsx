@@ -38,14 +38,14 @@ function Details() {
                         <HandleDate date={hackathon.Date} format={'short'} />
                     </span>
                     <img src={fullStop} className="h-4" />
-                    {/* {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
+                    {hackathon.Themes.map((tag) => (
                         <span
                             key={tag}
                             className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
                         >
                             {tag}
                         </span>
-                    ))} */}
+                    ))}
                 </div>
                 <div className="mt-3">
                     <h1 className="font-bold text-5xl text-primary">

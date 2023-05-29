@@ -44,21 +44,19 @@ function HackathonCard({ hackathon }) {
                             <span>{hackathon.PaymentMode} entry</span>
                         </div>
                         <div className="flex gap-2">
-                            {/* {hackathon.Themes && hackathon?.Themes[0].split(',').map((tag) => (
+                            {hackathon.Themes.map((tag) => (
                                 <span
                                     key={tag}
                                     className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
                                 >
                                     {tag}
                                 </span>
-                            ))} */}
+                            ))}
                         </div>
                     </div>
                 </div>
             </Link>
         </>
-      
-       
     );
 }
 
