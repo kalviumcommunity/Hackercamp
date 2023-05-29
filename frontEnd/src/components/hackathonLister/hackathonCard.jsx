@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import HandleDate from './handleDate';
 import HandleDay from './handleDay';
 import HandleTime from './handleTime';
-import 'react-loading-skeleton/dist/skeleton.css';
 import dotIcon from '../../assets/fullStop.png';
 function HackathonCard({ hackathon }) {
 
