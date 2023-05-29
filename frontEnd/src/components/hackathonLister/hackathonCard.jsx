@@ -47,7 +47,7 @@ function HackathonCard({ hackathon }) {
                             {hackathon.Themes.map((tag) => (
                                 <span
                                     key={tag}
-                                    className="font-medium text-slate-600 bg-slate-200 p-1 roudned"
+                                    className="font-semibold text-slate-600 bg-slate-200 p-1 roudned"
                                 >
                                     {tag}
                                 </span>
