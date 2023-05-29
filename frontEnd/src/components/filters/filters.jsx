@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Accordion from './accordion';
 import HackathonList from '../hackathonLister/hackathonList';
 function Filters({hackathon}) {
@@ -26,7 +27,7 @@ function Filters({hackathon}) {
              [e.target.name]: e.target.value,
          });
      };
-     useEffect(() => {
+      useEffect(() => {
          let filteredHackathons = hackathon;
 
          // Filter by theme
@@ -72,7 +73,7 @@ function Filters({hackathon}) {
 
     return (
         <div className="px-10% relative top-72 bg-slate-600">
-            <div className="flex fixed z-30 h-full  flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-3/12  bg-white  md:flex-col">
+            <div className="flex fixed  h-full  flex-col items-center border-r border-l border-slate-200 p-2 pr-6 w-3/12  bg-white  md:flex-col">
                 <Accordion
                     title="By Theme tags"
                     children={
@@ -93,7 +94,7 @@ function Filters({hackathon}) {
                         />
                     }
                 />
-                <hr className="w-10/12 my-3 text-slate-200" />
+                <hr className="w-10/12 my-3 text-slate-200 border" />
                 <Accordion
                     title="By Date"
                     children={
@@ -105,7 +106,7 @@ function Filters({hackathon}) {
                                 <input
                                     type="date"
                                     name="from"
-                                    className="border-slate-200 h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300 "
+                                    className="border-slate-200 h-10 w-56 rounded pl-4 text-sm border-2 ::placeholder focus:outline-blue-300"
                                     onChange={handleDateFilterChange}
                                 />
                             </div>
@@ -123,7 +124,7 @@ function Filters({hackathon}) {
                         </div>
                     }
                 />
-                <hr className="w-10/12 my-3 text-slate-200" />
+                <hr className="w-10/12 my-3 text-slate-200 border" />
                 <Accordion
                     title="By Price"
                     children={
@@ -149,7 +150,7 @@ function Filters({hackathon}) {
                         </div>
                     }
                 />
-                <hr className="w-9/12 my-3 text-slate-200" />
+                <hr className="w-9/12 my-3 text-slate-200 border" />
             </div>
             <div className="w-8/12 absolute left-1/3">
                 <HackathonList data={filteredHackathons} />

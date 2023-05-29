@@ -10,7 +10,6 @@ function Details() {
     const { id  } = useParams();
     const [hackathon,setHackathon]=useState([])
 
-    console.log(hackathon.Themes?.[0]);
     const fetchData=(url)=>{
         fetch(url).then((res)=>res.json())
         .then((res)=>{

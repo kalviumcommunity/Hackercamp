@@ -7,17 +7,13 @@ const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 const axios = require("axios");
 const FormData = require("form-data");
-const mockedData = require("../../frontEnd/src/components/data.json");
-const mongoose = require("mongoose");
-const Hackathon = require("./HackathonModel");
-const apiKey = process.env.API_KEY;
+const Hackathon = require("../models/HackathonModel");
+const connection = require('../models/dbConnection')
+const apiKey = process.env.API_KEY
 app.use(cors());
-console.log(process.env.MONGODB_STR);
-const dbURL = process.env.MONGODB_STR;
-mongoose
-  .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(port))
-  .catch((error) => console.log(error));
+
+
+
 
 app.post("/api/hackathons/", upload.single("Poster"), async (req, res) => {
   try {
@@ -90,3 +86,14 @@ app.get("/api/hackathons/:id", async (req, res) => {
     res.status(500).json({ message: "Error retrieving data" });
   }
 });
+
+
+app.listen(port, async() => {
+  try{
+    await connection;
+    console.log('connected to DB')
+  }
+  catch(err) {
+    console.log('Error occured')
+  }
+})
