@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import DatePicker from 'react-datepicker';
-
+import SidebarForForms from './sidebarForForms';
 import * as yup from 'yup';
-
 import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
 
 function HackathonCreation() {
+    const navigate = useNavigate();
     const validateRequired = (fieldName, value) => {
         if (value === '') {
             return `Required*`;
         } else if (
             fieldName === 'HackathonName' &&
-            (value.length > 25 || value.length < 5)
+            (value.length > 45 || value.length < 5)
         ) {
             return `Hackathon name character length should be between 5 and 25`;
         } else if (fieldName === 'HackathonAddress' && value.length > 30) {
@@ -22,27 +24,63 @@ function HackathonCreation() {
     };
 
     const validationSchema = yup.object({
-        checkBoxOption: yup
-            .array()
+        HackathonPrice: yup
+            .string()
             .min(1, 'At least one option must be selected'),
-        themeOption: yup.array().min(1, 'At least one option must be selected'),
+        ThemeOption: yup.array().required('An option must be selected'),
+        HackathonMode: yup.string().required('An option must be selected'),
     });
-
+    const handleFileChange = (event) => {
+        formik.setFieldValue('HackathonPoster', event.target.files[0]);
+    };
     const formik = useFormik({
         initialValues: {
             HackathonName: '',
             HackathonMode: '',
             HackathonAddress: '',
             OrganisationName: '',
-            date: '',
-            // hackathonTimings: '',
+            Date: '',
+            HackathonTimings: '',
             HackathonDescription: '',
             HackathonDetails: '',
-            checkBoxOption: [],
-            themeOption: [],
+            HackathonPrice: '',
+            ThemeOption: [],
+            HackathonPoster: '',
         },
-        onSubmit: (values) => {
-            console.log(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            try {
+                const formData = new FormData();
+                formData.append('Name', values.HackathonName);
+                formData.append('Mode', values.HackathonMode);
+                formData.append('Address', values.HackathonAddress);
+                formData.append('Themes', values.ThemeOption);
+                formData.append('Price', values.HackathonPrice);
+                formData.append('Date', values.Date);
+                formData.append('Timings', values.HackathonTimings);
+                formData.append('Organiser', values.OrganisationName);
+                formData.append('Description', values.HackathonDescription);
+                formData.append('Details', values.HackathonDetails);
+                formData.append('Poster', values.HackathonPoster);
+                const response = await fetch(
+                    'http://localhost:2003/api/hackathons',
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error('Error saving hackathon');
+                }
+
+                const savedHackathon = await response.json();
+                toast.success('Form submitted successfully!');
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            } catch (error) {
+                console.error(error);
+            }
         },
         validateOnChange: false,
         validateOnBlur: false,
@@ -55,27 +93,15 @@ function HackathonCreation() {
             }
             return errors;
         },
+        // This is to validate field which are radio buttons and checkboxes
         validationSchema,
     });
-
     const fields = [
         {
             label: 'Hackathon Name',
             name: 'HackathonName',
             type: 'text',
             placeholder: 'Enter hackathon name',
-        },
-        {
-            label: 'Hackathon Mode',
-            name: 'HackathonMode',
-            type: 'text',
-            placeholder: 'Eg., online or offline',
-        },
-        {
-            label: 'Hackathon Address',
-            name: 'HackathonAddress',
-            type: 'text',
-            placeholder: 'Enter hackathon address',
         },
         {
             label: 'Organisation Name',
@@ -109,7 +135,7 @@ function HackathonCreation() {
                 {formik.touched[field.name] &&
                     formik.errors[field.name] && ( // conditionally render error message
                         <span
-                            className="text-red-500 font-medium text-sm
+                            className="text-red-500 font-medium
                         "
                         >
                             {formik.errors[field.name]}
@@ -120,27 +146,10 @@ function HackathonCreation() {
 
     return (
         <div>
-            <div className="h-screen w-2/6 bg-primary font-roboto fixed z-50 top-0 left-0">
-                <Link to={'/'}>
-                    <div className="flex gap-1 text-3xl mt-10 ml-10">
-                        <div className="bg-blue-600 text-white w-10 h-8  grid justify-center items-center rounded drop-shadow-lg">
-                            <span className="text-xl font-bold">{'H'}</span>
-                        </div>
-                        <p className="text-white font-bold">HackerCamp</p>
-                    </div>
-                </Link>
-                <div className="absolute top-72 ml-10">
-                    <p className="text-white text-2xl mb-4">
-                        Empower your ideas. Transform tommorrow.
-                    </p>
-                    <p className="text-white">
-                        Unleash your creativity. Empower your ideas. Collaborate
-                        to transform tommorrow at our hackathon. Join us now!
-                    </p>
-                </div>
-            </div>
+            <ToastContainer />
             <div className="h-screen ml-33% w-4/6  mt-1 flex flex-col items-center">
                 <div className="h-2 w-594 bg-primary">&nbsp;</div>
+                <SidebarForForms />
                 <div className="w-594 border-slate-200 border-2">
                     <div className="py-3">
                         <h1 className="text-center text-22.5 font-semibold">
@@ -155,16 +164,15 @@ function HackathonCreation() {
                         <div className="flex font-roboto justify-between   w-11/12 mb-4">
                             <div>
                                 <label
-                                    htmlFor="checkBoxOption"
+                                    htmlFor="HackathonPrice"
                                     className="font-semibold text-base mb-4"
                                 >
-                                    Hackathon Entry
+                                    Hackathon Price
                                 </label>
                                 <div className="flex gap-2">
                                     <input
-                                        type="checkbox"
-                                        id="Free"
-                                        name="checkBoxOption"
+                                        type="radio"
+                                        name="HackathonPrice"
                                         value="Free"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -173,24 +181,24 @@ function HackathonCreation() {
                                 </div>
                                 <div className="flex gap-2 font-roboto">
                                     <input
-                                        type="checkbox"
-                                        id="Paid"
-                                        name="checkBoxOption"
+                                        type="radio"
+                                        name="HackathonPrice"
                                         value="Paid"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                     />
                                     <label htmlFor="Paid">Paid</label>
                                 </div>
-                                {formik.errors.checkBoxOption ? (
+                                {formik.errors.HackathonPrice ? (
                                     <span className="text-red-500">
-                                        {formik.errors.checkBoxOption}
+                                        {formik.errors.HackathonPrice}
                                     </span>
                                 ) : null}
                             </div>
+
                             <div className="flex flex-col pr-16 relative">
                                 <label
-                                    htmlFor="Hackathon Poster"
+                                    htmlFor="HackathonPoster"
                                     className="font-semibold text-base mb-2"
                                 >
                                     Hackathon Poster
@@ -198,112 +206,216 @@ function HackathonCreation() {
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    name="Hackathon Poster"
+                                    onChange={handleFileChange}
+                                    name="HackathonPoster"
                                     className="bg-blue-200 w-72 px-2 py-1 rounded border-2 border-whitegray"
                                 />
-                            </div>
-                        </div>
-                        <div className="flex font-roboto w-11/12 mb-4">
-                            <div>
-                                <label
-                                    htmlFor="themeOption"
-                                    className="font-semibold text-base mb-4 font-roboto"
-                                >
-                                    Hackathon Themes
-                                </label>
-                                <div className="flex gap-4">
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="checkbox"
-                                            id="ml"
-                                            name="themeOption"
-                                            value="ai"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.isSubmitting}
-                                        />
-                                        <label htmlFor="ml">ML</label>
-                                    </div>
-                                    <div className="flex gap-2 font-roboto">
-                                        <input
-                                            type="checkbox"
-                                            id="ai"
-                                            name="themeOption"
-                                            value="ai"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.isSubmitting}
-                                        />
-                                        <label htmlFor="ai">AI</label>
-                                    </div>
-                                    <div className="flex gap-2 font-roboto">
-                                        <input
-                                            type="checkbox"
-                                            id="blockchain"
-                                            name="themeOption"
-                                            value="blockchain"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.isSubmitting}
-                                        />
-                                        <label htmlFor="blockchain">
-                                            Blockchain
-                                        </label>
-                                    </div>
-                                    <div className="flex gap-2 font-roboto">
-                                        <input
-                                            type="checkbox"
-                                            id="web3.0"
-                                            name="themeOption"
-                                            value="web3.0"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.isSubmitting}
-                                        />
-                                        <label htmlFor="web3.0">Web3.0</label>
-                                    </div>
-                                </div>
-                                {formik.errors.themeOption ? (
+                                {formik.errors.HackathonPoster ? (
                                     <span className="text-red-500">
-                                        {formik.errors.themeOption}
+                                        {formik.errors.HackathonPoster}
                                     </span>
                                 ) : null}
                             </div>
                         </div>
-                        <div className="font-roboto flex flex-col w-11/12 mb-4">
+                        <div className="flex gap-8 font-roboto w-11/12 mb-4">
+                            <div>
+                                <label
+                                    htmlFor="ThemeOption"
+                                    className="font-semibold text-base font-roboto flex"
+                                >
+                                    Hackathon Themes
+                                </label>
+                                <div className="flex gap-4">
+                                    <div>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="checkbox"
+                                                id="ml"
+                                                name="ThemeOption"
+                                                value="ai"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                            <label htmlFor="ml">ML</label>
+                                        </div>
+                                        <div className="flex gap-2 font-roboto">
+                                            <input
+                                                type="checkbox"
+                                                id="ai"
+                                                name="ThemeOption"
+                                                value="ai"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                            <label htmlFor="ai">AI</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex gap-2 font-roboto">
+                                            <input
+                                                type="checkbox"
+                                                id="blockchain"
+                                                name="ThemeOption"
+                                                value="blockchain"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                            <label htmlFor="blockchain">
+                                                Blockchain
+                                            </label>
+                                        </div>
+                                        <div className="flex gap-2 font-roboto">
+                                            <input
+                                                type="checkbox"
+                                                id="web3.0"
+                                                name="ThemeOption"
+                                                value="web3.0"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                            <label htmlFor="web3.0">
+                                                Web3.0
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {formik.errors.ThemeOption ? (
+                                    <span className="text-red-500">
+                                        {formik.errors.ThemeOption}
+                                    </span>
+                                ) : null}
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="hackathonPrice"
+                                    className="font-semibold text-base mb-4"
+                                >
+                                    Hackathon Entry
+                                </label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="radio"
+                                        name="HackathonMode"
+                                        value="Offline"
+                                        onChange={(e) => {
+                                            formik.handleChange(e);
+                                            formik.setFieldValue(
+                                                'HackathonAddress',
+                                                ''
+                                            );
+                                        }}
+                                        onBlur={formik.handleBlur}
+                                    />
+                                    <label htmlFor="Offline">Offline</label>
+                                </div>
+                                <div className="flex gap-2 font-roboto">
+                                    <input
+                                        type="radio"
+                                        name="HackathonMode"
+                                        value="Online"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                    />
+                                    <label htmlFor="Online">Online</label>
+                                </div>
+                                {formik.errors.HackathonMode ? (
+                                    <span className="text-red-500">
+                                        {formik.errors.HackathonMode}
+                                    </span>
+                                ) : null}
+                            </div>
+                        </div>
+                        <div className="flex w-11/12 flex-col mb-4 justify-center">
                             <label
-                                htmlFor="Hackathon Date"
+                                htmlFor="Hackathon Address"
                                 className="font-semibold text-base mb-2"
                             >
-                                Hackathon date
+                                Hackathon Address
                             </label>
-                            <DatePicker
-                                name="date"
-                                selected={formik.values.date}
-                                onChange={(value) => {
-                                    formik.setFieldValue('date', value);
-                                }}
-                                onSelect={(value) => {
-                                    formik.setFieldValue('date', value);
-                                }}
-                                isClearable
-                                placeholderText="Enter the date"
-                                className="h-12 border border-whitegray w-11/12 pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"
-                            />
-                            {formik.errors.date ? (
+                            <input
+                                type="text"
+                                name="HackathonAddress"
+                                placeholder="Enter you address"
+                                value={
+                                    formik.values.HackathonMode === 'Online'
+                                        ? (formik.values.HackathonAddress =
+                                              'Online Event')
+                                        : formik.values.HackathonAddress
+                                }
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                disabled={
+                                    formik.values.HackathonMode == 'Online'
+                                }
+                                className="h-12 border border-whitegray pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"
+                            ></input>
+                            {formik.errors.HackathonAddress ? (
                                 <span className="text-red-500">
-                                    {formik.errors.date}
+                                    {formik.errors.HackathonAddress}
                                 </span>
                             ) : null}
                         </div>
-                        <div className="font-roboto flex flex-col w-11/12 mb-4">
-                            <label
-                                htmlFor="Hackathon Date"
-                                className="font-semibold text-base mb-2"
-                            >
-                                Hackathon Timings
-                            </label>
-                            {/* <TimeField label="Basic time field" /> */}
+                        <div className="flex w-11/12 justify-center">
+                            <div className="font-roboto w-3/6 flex flex-col  mb-4">
+                                <label
+                                    htmlFor="Hackathon Date"
+                                    className="font-semibold text-base mb-2"
+                                >
+                                    Hackathon date
+                                </label>
+                                <DatePicker
+                                    name="Date"
+                                    selected={formik.values.Date}
+                                    onChange={(value) => {
+                                        formik.setFieldValue('Date', value);
+                                    }}
+                                    onSelect={(value) => {
+                                        formik.setFieldValue('Date', value);
+                                    }}
+                                    placeholderText="Enter the date"
+                                    className="h-12 border border-whitegray w-9/12 pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"
+                                />
+                                {formik.errors.Date ? (
+                                    <span className="text-red-500">
+                                        {formik.errors.Date}
+                                    </span>
+                                ) : null}
+                            </div>
+                            <div className="font-roboto flex flex-col w-3/6 mb-4">
+                                <label
+                                    htmlFor="Hackathon Date"
+                                    className="font-semibold text-base mb-2"
+                                >
+                                    Hackathon Timings
+                                </label>
+                                <DatePicker
+                                    selected={formik.values.HackathonTimings}
+                                    onChange={(value) => {
+                                        formik.setFieldValue(
+                                            'HackathonTimings',
+                                            value
+                                        );
+                                    }}
+                                    placeholderText="Enter the time"
+                                    onSelect={(value) => {
+                                        formik.setFieldValue(
+                                            'HackathonTimings',
+                                            value
+                                        );
+                                    }}
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={30}
+                                    timeCaption="Time"
+                                    dateFormat="h:mm aa"
+                                    className="h-12 border border-whitegray w-9/12 pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"
+                                />
+                                {formik.errors.HackathonTimings ? (
+                                    <span className="text-red-500">
+                                        {formik.errors.HackathonTimings}
+                                    </span>
+                                ) : null}
+                            </div>
                         </div>
                         <div className="font-roboto flex flex-col w-11/12 mb-4">
                             <label
