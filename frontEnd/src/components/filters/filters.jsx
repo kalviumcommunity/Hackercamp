@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import Accordion from './accordion';
 import HackathonList from '../hackathonLister/hackathonList';
-function Filters({hackathon}) {
+
+function Filters({hackathon, isLoading}) {
     const [themeFilter, setThemeFilter] = useState('');
     const [filteredHackathons, setFilteredHackathon] = useState([]);
     const [checkboxes, setCheckboxes] = useState({
@@ -153,7 +153,10 @@ function Filters({hackathon}) {
                 <hr className="w-9/12 my-3 text-slate-200 border" />
             </div>
             <div className="w-8/12 absolute left-1/3">
-                <HackathonList data={filteredHackathons} />
+                <HackathonList
+                    data={filteredHackathons}
+                    isLoading={isLoading}
+                />
             </div>
         </div>
     );

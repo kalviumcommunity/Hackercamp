@@ -5,11 +5,14 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const client = import.meta.env.VITE_AUTH0_CLIENTID;
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Auth0Provider
-        domain="hacker-camp.jp.auth0.com"
-        clientId="x2QfwLOOV9I4s4f62PuL1OSzzN3b5Pdp"
+        domain={domain}
+        clientId={client}
         authorizationParams={{
             redirect_uri: window.location.origin,
         }}

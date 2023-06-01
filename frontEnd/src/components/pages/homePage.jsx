@@ -7,12 +7,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 function Homepage() {
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
+    const [isLoading, setLoading] = useState(true)
     async function fetchData() {
         const result = await fetch(
             'https://hacker-camp.onrender.com/api/hackathons'
         );
         const jsonData = await result.json(); // wait for the response to be parsed
         setData(jsonData); // set the state with the parsed data
+        setLoading(false)
     }
     useEffect(() => {
         fetchData();
@@ -25,7 +27,7 @@ function Homepage() {
         <div>
             <Navbar />
             <SearchBar setSearch={setSearch} />
-            <Filters hackathon={filteredHackathons} />
+            <Filters hackathon={filteredHackathons} isLoading={isLoading} />
         </div>
     );
 }

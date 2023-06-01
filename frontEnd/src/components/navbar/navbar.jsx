@@ -31,12 +31,6 @@ function Navbar() {
                     <div></div>
                 )}
 
-                {user &&
-                    console.log(user.name, user.email, user.picture)
-                }
-
-               
-
                 {isAuthenticated ? (
                     <button
                         onClick={() =>
