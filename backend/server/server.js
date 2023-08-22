@@ -4,7 +4,7 @@ const port = 2003;
 require("dotenv").config();
 const cors = require("cors");
 const multer = require("multer");
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage()});
 const axios = require("axios");
 const FormData = require("form-data");
 const Hackathon = require("../models/HackathonModel");
@@ -33,7 +33,7 @@ app.post("/api/hackathons/", upload.single("Poster"), async (req, res) => {
         headers: formData.getHeaders(),
       }
     );
-
+        
     const ImageUrl = response.data.data.url;
 
     // Create a new instance of the Hackathon model
@@ -49,7 +49,6 @@ app.post("/api/hackathons/", upload.single("Poster"), async (req, res) => {
       Themes: req.body.Themes.split(','),
       Description: req.body.Description,
       Details: req.body.Details,
-      Slug: req.body.Name.toLowerCase().replace(/\s/g, ""),
     });
 
     // Save the hackathon to the database

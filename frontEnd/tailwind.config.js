@@ -42,7 +42,7 @@ export default {
                 88: '88px',
                 1220: '1220px',
                 551: '551px',
-                680:'680px'
+                680: '680px',
             },
             fontFamily: {
                 roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
@@ -54,7 +54,7 @@ export default {
             margin: {
                 '1%': '1%',
                 500: '500px',
-                '33%':'33%'
+                '33%': '33%',
             },
             scale: {
                 1.009: '1.009',

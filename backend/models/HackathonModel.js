@@ -14,6 +14,7 @@ const hackathonSchema = new Schema({
   Themes: { type: [String], required: true },
   Description: { type: String, required: true },
   Details: { type: String, required: true },
+  Reg
 });
 
 

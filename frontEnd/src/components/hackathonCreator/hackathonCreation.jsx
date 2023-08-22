@@ -49,18 +49,26 @@ function HackathonCreation() {
         },
         onSubmit: async (values) => {
             try {
+                const formFields = {
+                    Name: values.HackathonName,
+                    Mode: values.HackathonMode,
+                    Address: values.HackathonAddress,
+                    Themes: values.ThemeOption,
+                    Price: values.HackathonPrice,
+                    Date: values.Date,
+                    Timings: values.HackathonTimings,
+                    Organiser: values.OrganisationName,
+                    Description: values.HackathonDescription,
+                    Details: values.HackathonDetails,
+                    Poster: values.HackathonPoster,
+                };
+
                 const formData = new FormData();
-                formData.append('Name', values.HackathonName);
-                formData.append('Mode', values.HackathonMode);
-                formData.append('Address', values.HackathonAddress);
-                formData.append('Themes', values.ThemeOption);
-                formData.append('Price', values.HackathonPrice);
-                formData.append('Date', values.Date);
-                formData.append('Timings', values.HackathonTimings);
-                formData.append('Organiser', values.OrganisationName);
-                formData.append('Description', values.HackathonDescription);
-                formData.append('Details', values.HackathonDetails);
-                formData.append('Poster', values.HackathonPoster);
+
+                for (const field in formFields) {
+                    formData.append(field, formFields[field]);
+                }
+
                 const response = await fetch(
                     'https://hacker-camp.onrender.com/api/hackathons',
                     {
@@ -369,9 +377,7 @@ function HackathonCreation() {
                                     onChange={(value) => {
                                         formik.setFieldValue('Date', value);
                                     }}
-                                    onSelect={(value) => {
-                                        formik.setFieldValue('Date', value);
-                                    }}
+                                    minDate={new Date()}
                                     placeholderText="Enter the date"
                                     className="h-12 border border-whitegray w-9/12 pl-6 rounded placeholder:text-sm bg-graywhite focus:outline-blue-300"
                                 />
