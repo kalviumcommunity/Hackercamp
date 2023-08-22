@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../navbar/navbar';
 import SearchBar from '../searchbar/searchBar';
 import Filters from '../filters/filters';
-import { useAuth0 } from '@auth0/auth0-react';
+
 
 function Homepage() {
     const [data, setData] = useState([]);
@@ -14,14 +14,18 @@ function Homepage() {
         );
         const jsonData = await result.json(); // wait for the response to be parsed
         setData(jsonData); // set the state with the parsed data
+        console.log(jsonData)
         setLoading(false)
     }
     useEffect(() => {
         fetchData();
+
     }, []);
 
     const filteredHackathons = data.filter((_data) => {
-        return _data.Name.toLowerCase().includes(search.toLowerCase());
+        let searchByName =  _data.Name.toLowerCase().includes(search.toLowerCase())
+        let searchByDescription =  _data.Description.toLowerCase().includes(search.toLowerCase());
+        return searchByName||searchByDescription
     });
     return (
         <div>

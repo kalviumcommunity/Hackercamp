@@ -4,6 +4,8 @@ import HandleDate from './handleDate';
 import HandleDay from './handleDay';
 import HandleTime from './handleTime';
 import dotIcon from '../../assets/fullStop.png';
+import timerSvg from '../../assets/timer.svg';
+import DaysDiff from './daysCounter';
 function HackathonCard({ hackathon }) {
 
     return (
@@ -36,6 +38,14 @@ function HackathonCard({ hackathon }) {
                             />
                             <img src={dotIcon} alt="" className="h-3 " />
                             <HandleTime time={hackathon.Timings} />
+                        </div>
+                        <div className='flex gap-1'>
+                            <div className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-200"></span>
+                                <img src={timerSvg} alt="timer-img" />
+                            </div>
+                            <DaysDiff randomDate={hackathon.Date} />
                         </div>
                         <div className="flex gap-1 items-center text-15 font-roboto  text-blackish">
                             <span>{hackathon.Address}</span>

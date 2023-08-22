@@ -17,7 +17,7 @@ function HandleTime({time}) {
       period;
   return (
       <div>
-          <span>{formattedTime}</span>
+          <span >{formattedTime}</span>
       </div>
   );
 }

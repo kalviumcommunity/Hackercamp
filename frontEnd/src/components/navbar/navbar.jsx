@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
-
+import user from '../../assets/user.png'
 function Navbar() {
     const { loginWithRedirect } = useAuth0();
     const { logout } = useAuth0();
@@ -42,7 +42,7 @@ function Navbar() {
                         }
                         className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
                     >
-                        Logout
+                        {user.name}
                     </button>
                 ) : (
                     <button
@@ -51,6 +51,7 @@ function Navbar() {
                     >
                         Sign in
                     </button>
+                   
                 )}
             </div>
         </nav>
