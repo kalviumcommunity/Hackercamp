@@ -18,18 +18,18 @@ function Navbar() {
                 </div>
             </Link>
             <div className="flex gap-x-4 items-center">
-                {isAuthenticated ? (
+                {/* {isAuthenticated ? ( */}
                     <div>
                         <Link to={'/organise'}>
                             <span className="text-slate-500 font-semibold cursor-pointer  hover:text-blue-600">
                                 Organise Hackathons
                             </span>
                         </Link>
-                        <span className="text-slate-400">|</span>
+                        <span className="text-slate-400 pl-4">|</span>
                     </div>
-                ) : (
-                    <div></div>
-                )}
+                {/* // ) : (
+                //     <div></div>
+                // )} */}
 
                 {isAuthenticated ? (
                     <button
